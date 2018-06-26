@@ -19,6 +19,7 @@
   "license": "MIT",
   "private": false,
   "scripts": {
+    "codecov": "codecov",
     "prebuild": "tslint -p tsconfig.json",
     "build": "npm-run-all build:*",
     "build:rollup": "rollup -c --environment BUILD:production",
@@ -41,6 +42,7 @@
     "@types/node": "^10.3.5",
     "@types/serialize-javascript": "^1.3.2",
     "ava": "1.0.0-beta.6",
+    "codecov": "^3.0.2",
     "cpx": "^1.5.0",
     "cross-env": "^5.2.0",
     "husky": "^0.14.3",
