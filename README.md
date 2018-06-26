@@ -167,7 +167,7 @@ console.log(await result); // prints 42
 
 #### Atomics
 
-```
+```javascript
 const buffer = new SharedArrayBuffer(1 * Int32Array.BYTES_PER_ELEMENT);
 const array = new Int32Array(buffer);
 const pool = Executors.newSingleThreadedExecutor();
