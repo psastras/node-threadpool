@@ -44,7 +44,7 @@ test("can pass data", async t => {
   const data = {
     answerToLife: 42
   };
-  const result = pool.submit(async d => d.answerToLife, data);
+  const result = pool.submit(async d => d!.answerToLife, data);
 
   t.is(await result, 42);
 });
@@ -54,7 +54,7 @@ test("can pass data with functions", async t => {
   const data = {
     answerToLife: () => 42
   };
-  const result = pool.submit(async d => d.answerToLife(), data);
+  const result = pool.submit(async d => d!.answerToLife(), data);
 
   t.is(await result, 42);
 });
@@ -66,7 +66,7 @@ test("can pass data with maps", async t => {
   const data = {
     map
   };
-  const result = pool.submit(async d => d.map.get("key"), data);
+  const result = pool.submit(async d => d!.map.get("key"), data);
   t.is(await result, "value");
 });
 
@@ -78,11 +78,11 @@ test("can pass shared data", async t => {
     sharedBuffer
   };
   // set the data in the first one to 3
-  await pool.submit(async d => (new Int32Array(d.sharedBuffer)[0] = 3), data);
+  await pool.submit(async d => (new Int32Array(d!.sharedBuffer)[0] = 3), data);
 
   // read the data from the shared buffer
   const result = pool.submit(
-    async d => new Int32Array(d.sharedBuffer)[0],
+    async d => new Int32Array(d!.sharedBuffer)[0],
     data
   );
   t.is(await result, 3);
@@ -94,10 +94,10 @@ test("can pass raw shared data", async t => {
   const pool = Executors.newSingleThreadedExecutor();
 
   // set the data in the first one to 3
-  await pool.submit(async d => (new Int32Array(d)[0] = 3), sharedBuffer);
+  await pool.submit(async d => (new Int32Array(d!)[0] = 3), sharedBuffer);
 
   // read the data from the shared buffer
-  const result = pool.submit(async d => new Int32Array(d)[0], sharedBuffer);
+  const result = pool.submit(async d => new Int32Array(d!)[0], sharedBuffer);
   t.is(await result, 3);
 });
 
@@ -107,7 +107,7 @@ test("atomic lock", async t => {
   const pool = Executors.newSingleThreadedExecutor();
 
   const result = pool.submit(async d => {
-    const view = new Int32Array(d);
+    const view = new Int32Array(d!);
     Atomics.wait(view, 0, 0); // wait here until the value is no longer 0
     return Atomics.load(view, 0);
   }, buffer);

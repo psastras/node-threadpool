@@ -6,5 +6,5 @@
     "sourceMap": true,
     "strict": true
   },
-  "include": ["lib", "workers"]
+  "include": ["."]
 }

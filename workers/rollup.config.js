@@ -10,7 +10,7 @@ const plugins = [
   nodeResolve(),
   typescript({
     typescript: require("typescript"),
-    tsconfig: "lib/tsconfig.json"
+    tsconfig: "workers/tsconfig.json"
   }),
   resolve()
 ];
@@ -26,7 +26,7 @@ if (process.env.BUILD !== "production") {
 external.push("worker_threads");
 
 export default {
-  input: "./lib/index.ts",
+  input: "./workers/fixed-thread-pool-worker.ts",
 
   plugins,
   external,
