@@ -67,7 +67,7 @@
 					<a href="https://badge.fury.io/js/node-threadpool"><img src="https://badge.fury.io/js/node-threadpool.svg" alt="npm version"></a>
 				<a href="https://github.com/semantic-release/semantic-release"><img src="https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg" alt="semantic-release"></a></p>
 				<p><strong>WARNING: This project is mostly experimental and the API is subject to change.</strong></p>
-				<p>This package implements thread pools for node 10.5&#39;s new worker thread API (see: <a href="https://nodejs.org/api/worker_threads.html)">https://nodejs.org/api/worker_threads.html)</a>.</p>
+				<p>This package implements thread pools for node 10.5&#39;s new worker thread API (see: <a href="https://nodejs.org/api/worker_threads.html)">https://nodejs.org/api/worker_threads.html)</a>. Supports transpiled code (ex: you may use Typescript to define your workers).</p>
 				<h2 id="usage">Usage</h2>
 				<p><a href="https://psastras.github.io/node-threadpool/modules/executors.html">https://psastras.github.io/node-threadpool/modules/executors.html</a></p>
 				<p>If you&#39;re familiar with Java&#39;s thread pool API, this should be very familiar:</p>
@@ -113,6 +113,22 @@
 <span class="hljs-built_in">console</span>.log(<span class="hljs-keyword">await</span> result2); <span class="hljs-comment">// joins and prints "done2"</span>
 </code></pre>
 				<p>See the <a href="https://psastras.github.io/node-threadpool/">documentation</a> for full API details.</p>
+				<h3 id="warning">Warning</h3>
+				<p>You may only access data within the runnable functions context. For example, this is an error:</p>
+				<pre><code class="lang-javascript"><span class="hljs-keyword">const</span> hello = <span class="hljs-string">"hello"</span>;
+<span class="hljs-keyword">await</span> pool.submit(<span class="hljs-keyword">async</span> () =&gt; hello);
+</code></pre>
+				<p>Instead, use the optional <code>data</code> object when submitting the function:</p>
+				<pre><code class="lang-javascript"><span class="hljs-keyword">const</span> hello = <span class="hljs-string">"hello"</span>;
+<span class="hljs-keyword">await</span> pool.submit(<span class="hljs-keyword">async</span> (data) =&gt; data.hello, hello);
+</code></pre>
+				<p>Similarly you must require third party modules from <em>inside</em> the run method:</p>
+				<pre><code class="lang-javascript"><span class="hljs-keyword">const</span> hello = <span class="hljs-string">"hello"</span>;
+<span class="hljs-keyword">await</span> pool.submit(<span class="hljs-keyword">async</span> () =&gt; {
+  <span class="hljs-keyword">const</span> fs = <span class="hljs-built_in">require</span>(<span class="hljs-string">'fs'</span>);
+  fs.readFileSync(<span class="hljs-string">'README'</span>);
+});
+</code></pre>
 				<h2 id="todos">TODOs</h2>
 				<ul>
 					<li>Figure out better function / data serialization.</li>
