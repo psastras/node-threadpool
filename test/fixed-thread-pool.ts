@@ -69,3 +69,34 @@ test("can pass data with maps", async t => {
   const result = pool.submit(async d => d.map.get("key"), data);
   t.is(await result, "value");
 });
+
+test("can pass shared data", async t => {
+  const sharedBuffer = new SharedArrayBuffer(1 * Int32Array.BYTES_PER_ELEMENT);
+  const array = new Int32Array(sharedBuffer);
+  const pool = Executors.newSingleThreadedExecutor();
+  const data = {
+    sharedBuffer
+  };
+  // set the data in the first one to 3
+  await pool.submit(async d => (new Int32Array(d.sharedBuffer)[0] = 3), data);
+
+  // read the data from the shared buffer
+  const result = pool.submit(
+    async d => new Int32Array(d.sharedBuffer)[0],
+    data
+  );
+  t.is(await result, 3);
+});
+
+test("can pass raw shared data", async t => {
+  const sharedBuffer = new SharedArrayBuffer(1 * Int32Array.BYTES_PER_ELEMENT);
+  const array = new Int32Array(sharedBuffer);
+  const pool = Executors.newSingleThreadedExecutor();
+
+  // set the data in the first one to 3
+  await pool.submit(async d => (new Int32Array(d)[0] = 3), sharedBuffer);
+
+  // read the data from the shared buffer
+  const result = pool.submit(async d => new Int32Array(d)[0], sharedBuffer);
+  t.is(await result, 3);
+});

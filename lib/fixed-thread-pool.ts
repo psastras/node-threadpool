@@ -3,6 +3,7 @@
  */
 
 import { deserialize, serialize } from "surrial";
+import { isObject } from "util";
 import {
   MessageChannel,
   MessagePortEvent,
@@ -15,10 +16,11 @@ import { ThreadPool } from "./thread-pool";
 const workerThread = `
 const { parentPort } = require('worker_threads');
 const { serialize, deserialize } = require('surrial');
-parentPort.on('message', ({ value, port, runnable, data }) => {
+parentPort.on('message', ({ value, port, runnable, data, rawData }) => {
   if (value === "__run__") {
     try {
-      deserialize(runnable)(deserialize(data)).then((result) => {
+      const hydratedData = data && (data instanceof SharedArrayBuffer ? data : Object.assign(deserialize(data), rawData));
+      deserialize(runnable)(hydratedData).then((result) => {
         port.postMessage({ value: "__result__", result: serialize(result) });
       })
     } catch (e) {
@@ -93,10 +95,25 @@ export class FixedThreadPool implements ThreadPool.IThreadPool {
       const [runnable, data, success, error] = this.queue.shift()!;
       const worker = this.freeWorkers.shift()!;
       const subChannel = new MessageChannel();
+      const rawData: any = {};
+
+      if (typeof data === "object") {
+        Object.entries(data).forEach(([key, value]) => {
+          if (value instanceof SharedArrayBuffer) {
+            rawData[key] = value;
+            delete data.key;
+          }
+        });
+      }
+
       worker.postMessage(
         {
-          data: serialize(data) || {},
+          data:
+            data instanceof SharedArrayBuffer || !data
+              ? data
+              : serialize(data) || {},
           port: subChannel.port1,
+          rawData,
           runnable: serialize(runnable),
           value: "__run__"
         },

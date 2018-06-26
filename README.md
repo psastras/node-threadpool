@@ -15,6 +15,7 @@ This package implements thread pools using node 10.5's new worker thread API (se
 - Supports transpiled code (ex: you may use Typescript to define your workers)
 - Typesafe (if you're using Typescript, you can write workers with type inference)
 - Can send most types of data including maps, sets, etc.
+- Supports shared data between threads
 
 ## Why
 
@@ -151,12 +152,31 @@ const result = pool.submit(async d => d.map.get("key"), data);
 console.log(await result); // prints "value"
 ```
 
+### Shared Data
+
+```typescript
+const buffer = new SharedArrayBuffer(1 * Int32Array.BYTES_PER_ELEMENT);
+const array = new Int32Array(sharedBuffer);
+
+// theres no lock, so in order to write safely we'll use one thread for this toy example
+const pool = Executors.newSingleThreadedExecutor();
+
+// set the data in the shared buffer to 42
+await pool.submit(async d => (new Int32Array(d)[0] = 42), buffer);
+
+// read the data from the shared buffer
+const result = pool.submit(async d => new Int32Array(d)[0], buffer);
+
+console.log(await result); // prints 42
+```
+
 ## TODOs
 
 - Figure out better function / data serialization.
 - Support cached thread executor
 - Clean up code
 - Settle on an API (when node's api is stable)
+- Support nested shared buffer serialization
 
 ## License
 
