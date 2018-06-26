@@ -75,6 +75,7 @@
 					<li>Supports transpiled code (ex: you may use Typescript to define your workers)</li>
 					<li>Typesafe (if you&#39;re using Typescript, you can write workers with type inference)</li>
 					<li>Can send most types of data including maps, sets, etc.</li>
+					<li>Supports shared data between threads</li>
 				</ul>
 				<h2 id="why">Why</h2>
 				<p>Worker threads are usually expensive to create, a thread pool maintains the threads and allows you to submit work on the fly, without having to pay the cost of recreating threads.</p>
@@ -157,12 +158,28 @@ map.set(<span class="hljs-string">"key"</span>, <span class="hljs-string">"value
 <span class="hljs-keyword">const</span> result = pool.submit(<span class="hljs-keyword">async</span> d =&gt; d.map.get(<span class="hljs-string">"key"</span>), data);
 <span class="hljs-built_in">console</span>.log(<span class="hljs-keyword">await</span> result); <span class="hljs-comment">// prints "value"</span>
 </code></pre>
+				<h3 id="shared-data">Shared Data</h3>
+				<pre><code class="lang-typescript"><span class="hljs-keyword">const</span> buffer = <span class="hljs-keyword">new</span> SharedArrayBuffer(<span class="hljs-number">1</span> * <span class="hljs-built_in">Int32Array</span>.BYTES_PER_ELEMENT);
+<span class="hljs-keyword">const</span> array = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Int32Array</span>(sharedBuffer);
+
+<span class="hljs-comment">// theres no lock, so in order to write safely we'll use one thread for this toy example</span>
+<span class="hljs-keyword">const</span> pool = Executors.newSingleThreadedExecutor();
+
+<span class="hljs-comment">// set the data in the shared buffer to 42</span>
+<span class="hljs-keyword">await</span> pool.submit(<span class="hljs-keyword">async</span> d =&gt; (<span class="hljs-keyword">new</span> <span class="hljs-built_in">Int32Array</span>(d)[<span class="hljs-number">0</span>] = <span class="hljs-number">42</span>), buffer);
+
+<span class="hljs-comment">// read the data from the shared buffer</span>
+<span class="hljs-keyword">const</span> result = pool.submit(<span class="hljs-keyword">async</span> d =&gt; <span class="hljs-keyword">new</span> <span class="hljs-built_in">Int32Array</span>(d)[<span class="hljs-number">0</span>], buffer);
+
+<span class="hljs-built_in">console</span>.log(<span class="hljs-keyword">await</span> result); <span class="hljs-comment">// prints 42</span>
+</code></pre>
 				<h2 id="todos">TODOs</h2>
 				<ul>
 					<li>Figure out better function / data serialization.</li>
 					<li>Support cached thread executor</li>
 					<li>Clean up code</li>
 					<li>Settle on an API (when node&#39;s api is stable)</li>
+					<li>Support nested shared buffer serialization</li>
 				</ul>
 				<h2 id="license">License</h2>
 				<p>MIT Licensed, see the LICENSE file.</p>
