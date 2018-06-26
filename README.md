@@ -12,12 +12,12 @@ This package implements thread pools using node 10.5's new worker thread API (se
 
 ## Features
 
-- Lightweight: one dependency (`surrial`)
+- Lightweight: one dependency (`surrial`) for serialization
 - Simple API: submit a function, await a result (no need to mess with loading from files, strings, etc.)
 - Supports transpiled code (ex: you may use Typescript to define your workers)
 - Typesafe (if you're using Typescript, you can write workers with type inference)
 - Can send most types of data including maps, sets, etc.
-- Supports shared data between threads
+- Supports shared data between threads, see the [example](#Shared-Data)
 
 ## Why
 
@@ -36,15 +36,6 @@ import { Executors } from "node-threadpool";
 
 const pool = Executors.newFixedThreadPool(1);
 const result = pool.submit(async () => "hello world");
-
-console.log(await result); // prints "hello world"
-```
-
-```typescript
-import { Executors } from "node-threadpool";
-
-const pool = Executors.newFixedThreadPool(1);
-const result = pool.submit(async (): Promise<string> => "hello world");
 
 console.log(await result); // prints "hello world"
 ```
@@ -107,7 +98,7 @@ Note: if you're not using async / await, Promise based functions work just as we
 
 ### Warning
 
-You may only access data within the runnable functions context. For example, this is an error:
+You may only access data within the runnable function's context. For example, this is an error:
 
 ```javascript
 const hello = "hello";
@@ -118,13 +109,12 @@ Instead, use the optional `data` object when submitting the function:
 
 ```javascript
 const hello = "hello";
-await pool.submit(async (data) => data.hello, hello);
+await pool.submit(async (data) => data, hello);
 ```
 
 Similarly you must require third party modules from _inside_ the run method:
 
 ```javascript
-const hello = "hello";
 await pool.submit(async () => {
   const fs = require('fs');
   fs.readFileSync('README');
