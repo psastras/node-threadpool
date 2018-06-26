@@ -21,7 +21,7 @@ jobs:
           - v1-dependencies-
 
       - run: npm ci
-      - run: sudo pip install codecov
+      - run: pip install codecov
 
       - save_cache:
           paths:
