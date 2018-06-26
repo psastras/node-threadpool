@@ -16,7 +16,7 @@ test("propagates errors", async t => {
       throw new Error("rekt");
     })
     .catch(e => {
-      t.is("rekt", e.message);
+      t.deepEqual(new Error("rekt"), e);
     });
 });
 
@@ -45,6 +45,16 @@ test("can pass data", async t => {
     answerToLife: 42
   };
   const result = pool.submit(async d => d.answerToLife, data);
+
+  t.is(await result, 42);
+});
+
+test("can pass data with functions", async t => {
+  const pool = Executors.newSingleThreadedExecutor();
+  const data = {
+    answerToLife: () => 42
+  };
+  const result = pool.submit(async d => d.answerToLife(), data);
 
   t.is(await result, 42);
 });

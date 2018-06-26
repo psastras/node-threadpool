@@ -2,6 +2,7 @@
  * @module FixedThreadPool
  */
 
+import { deserialize, serialize } from "surrial";
 import {
   MessageChannel,
   MessagePortEvent,
@@ -9,39 +10,19 @@ import {
   Worker,
   WorkerOptions
 } from "worker_threads";
-import { serialize } from "./serialize";
 import { ThreadPool } from "./thread-pool";
 
 const workerThread = `
 const { parentPort } = require('worker_threads');
-
-const deserialize = (serialized) => {
-  const reviver = (_, value) => {
-    if (typeof value === "string") {
-      try {
-        if (value.indexOf("function ") === 0) {
-          let functionTemplate = \`(\${value})\`;
-          return eval(functionTemplate);
-        } else {
-          return eval(value);
-        }
-      } catch {
-        return value
-      }
-    }
-    return value;
-  };
-  return JSON.parse(serialized, reviver);
-};
-
+const { serialize, deserialize } = require('surrial');
 parentPort.on('message', ({ value, port, runnable, data }) => {
   if (value === "__run__") {
     try {
-      deserialize(runnable)(data).then((result) => {
-        port.postMessage({ value: "__result__", result });
+      deserialize(runnable)(deserialize(data)).then((result) => {
+        port.postMessage({ value: "__result__", result: serialize(result) });
       })
     } catch (e) {
-      port.postMessage({ value: "__error__", result: e.message });
+      port.postMessage({ value: "__error__", result: serialize(e), msg: e.message });
     }
   }
 });
@@ -58,7 +39,7 @@ export class FixedThreadPool implements ThreadPool.IThreadPool {
       (data?: any) => Promise<any>,
       any,
       (result: any) => void,
-      (err: string) => void
+      (err: Error) => void
     ]
   >;
 
@@ -83,8 +64,8 @@ export class FixedThreadPool implements ThreadPool.IThreadPool {
         (result: T) => {
           resolve(result);
         },
-        (msg: string) => {
-          reject(new Error(msg));
+        (err: Error) => {
+          reject(err);
         }
       );
     });
@@ -101,7 +82,7 @@ export class FixedThreadPool implements ThreadPool.IThreadPool {
     fn: (data?: D) => Promise<T>,
     data: D,
     success: (result: T) => void,
-    err: (msg: string) => void
+    err: (err: Error) => void
   ): any => {
     this.queue.push([fn, data, success, err]);
     this.executeNext();
@@ -114,7 +95,7 @@ export class FixedThreadPool implements ThreadPool.IThreadPool {
       const subChannel = new MessageChannel();
       worker.postMessage(
         {
-          data: data || {},
+          data: serialize(data) || {},
           port: subChannel.port1,
           runnable: serialize(runnable),
           value: "__run__"
@@ -123,15 +104,25 @@ export class FixedThreadPool implements ThreadPool.IThreadPool {
       );
       subChannel.port2.on(
         "message",
-        ({ result, value }: { result: any; value: string }) => {
+        ({
+          result,
+          value,
+          msg
+        }: {
+          result: any;
+          value: string;
+          msg: string;
+        }) => {
           if (value === "__result__") {
             this.freeWorkers.push(worker);
             this.executeNext();
-            success(result);
+            success(deserialize(result));
           } else if (value === "__error__") {
             this.freeWorkers.push(worker);
             this.executeNext();
-            error(result);
+            const e = deserialize(result);
+            e.message = msg;
+            error(e);
           }
         }
       );

@@ -10,10 +10,11 @@ This package implements thread pools using node 10.5's new worker thread API (se
 
 ## Features
 
-- Lightweight: zero dependencies
+- Lightweight: one dependency (`surrial`)
 - Simple API: submit a function, await a result (no need to mess with loading from files, strings, etc.)
 - Supports transpiled code (ex: you may use Typescript to define your workers)
 - Typesafe (if you're using Typescript, you can write workers with type inference)
+- Can send most types of data including class instances to worker threads
 
 ## Why
 
