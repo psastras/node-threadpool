@@ -6,7 +6,7 @@
 
 **WARNING: This project is mostly experimental and the API is subject to change.**
 
-This package implements thread pools for node 10.5's new worker thread API (see: https://nodejs.org/api/worker_threads.html).
+This package implements thread pools for node 10.5's new worker thread API (see: https://nodejs.org/api/worker_threads.html). Supports transpiled code (ex: you may use Typescript to define your workers).
 
 ## Usage
 
@@ -85,6 +85,25 @@ console.log(await result2); // joins and prints "done2"
 ```
 
 See the [documentation](https://psastras.github.io/node-threadpool/) for full API details.
+
+### Warning
+
+You may only access data within the runnable functions context. For example, this is an error:
+
+```javascript
+const hello = "hello";
+await pool.submit(async () => hello);
+```
+
+Similarly you must require third party modules from _inside_ the run method:
+
+```javascript
+const hello = "hello";
+await pool.submit(async () => {
+  const fs = require('fs');
+  fs.readFileSync('README');
+});
+```
 
 ## TODOs
 

@@ -10,14 +10,3 @@ export const serialize = (object: any): string => {
   };
   return JSON.stringify(object, replacer, 2);
 };
-
-export const deserialize = <T>(serialized: string): T => {
-  const reviver = (_: string, value: any) => {
-    if (typeof value === "string" && value.indexOf("function ") === 0) {
-      const functionTemplate = `(${value}).call(this)`;
-      return new Function(functionTemplate);
-    }
-    return value;
-  };
-  return JSON.parse(serialized, reviver);
-};
