@@ -75,6 +75,9 @@
 					<li>Supports transpiled code (ex: you may use Typescript to define your workers)</li>
 					<li>Typesafe (if you&#39;re using Typescript, you can write workers with type inference)</li>
 				</ul>
+				<h2 id="why">Why</h2>
+				<p>Worker threads are usually expensive to create, a thread pool maintains the threads and allows you to submit work on the fly, without having to pay the cost of recreating threads.</p>
+				<p>With node&#39;s new <code>worker_thread</code> API, threads in the pool can pass messages to each other and read and write to shared memory.</p>
 				<h2 id="usage">Usage</h2>
 				<p>Full API documentation can be found here: <a href="https://psastras.github.io/node-threadpool/modules/executors.html">https://psastras.github.io/node-threadpool/modules/executors.html</a>.</p>
 				<p>If you&#39;re familiar with Java&#39;s thread pool API, this should be very familiar:</p>

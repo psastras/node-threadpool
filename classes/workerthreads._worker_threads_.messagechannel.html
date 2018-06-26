@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>IThreadPool | node-threadpool</title>
+	<title>MessageChannel | node-threadpool</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -54,34 +54,35 @@
 					<a href="../globals.html">Globals</a>
 				</li>
 				<li>
-					<a href="../modules/threadpool.html">ThreadPool</a>
+					<a href="../modules/workerthreads.html">WorkerThreads</a>
 				</li>
 				<li>
-					<a href="../modules/threadpool.threadpool-1.html">ThreadPool</a>
+					<a href="../modules/workerthreads._worker_threads_.html">&quot;worker_threads&quot;</a>
 				</li>
 				<li>
-					<a href="threadpool.threadpool-1.ithreadpool.html">IThreadPool</a>
+					<a href="workerthreads._worker_threads_.messagechannel.html">MessageChannel</a>
 				</li>
 			</ul>
-			<h1>Interface IThreadPool</h1>
+			<h1>Class MessageChannel</h1>
 		</div>
 	</div>
 </header>
 <div class="container container-main">
 	<div class="row">
 		<div class="col-8 col-content">
+			<section class="tsd-panel tsd-comment">
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>Instances of the worker.MessageChannel class represent an asynchronous, two-way communications channel. The MessageChannel has no methods of its own. new MessageChannel() yields an object with port1 and port2 properties, which refer to linked MessagePort instances.</p>
+					</div>
+				</div>
+			</section>
 			<section class="tsd-panel tsd-hierarchy">
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">IThreadPool</span>
+						<span class="target">MessageChannel</span>
 					</li>
-				</ul>
-			</section>
-			<section class="tsd-panel">
-				<h3>Implemented by</h3>
-				<ul class="tsd-hierarchy">
-					<li><a href="../classes/fixedthreadpool.fixedthreadpool-1.html" class="tsd-signature-type">FixedThreadPool</a></li>
 				</ul>
 			</section>
 			<section class="tsd-panel-group tsd-index-group">
@@ -91,7 +92,8 @@
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="threadpool.threadpool-1.ithreadpool.html#submit" class="tsd-kind-icon">submit</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="workerthreads._worker_threads_.messagechannel.html#port1" class="tsd-kind-icon">port1</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="workerthreads._worker_threads_.messagechannel.html#port2" class="tsd-kind-icon">port2</a></li>
 							</ul>
 						</section>
 					</div>
@@ -99,66 +101,25 @@
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="submit" class="tsd-anchor"></a>
-					<h3>submit</h3>
-					<div class="tsd-signature tsd-kind-icon">submit<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">function</span></div>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="port1" class="tsd-anchor"></a>
+					<h3>port1</h3>
+					<div class="tsd-signature tsd-kind-icon">port1<span class="tsd-signature-symbol">:</span> <a href="workerthreads._worker_threads_.messageport.html" class="tsd-signature-type">MessagePort</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/psastras/node-threadpool/blob/bf7348e/lib/thread-pool.d.ts#L7">thread-pool.d.ts:7</a></li>
+							<li>Defined in <a href="https://github.com/psastras/node-threadpool/blob/bf7348e/lib/worker_threads.d.ts#L9">worker_threads.d.ts:9</a></li>
 						</ul>
 					</aside>
-					<div class="tsd-type-declaration">
-						<h4>Type declaration</h4>
-						<ul class="tsd-parameters">
-							<li class="tsd-parameter-siganture">
-								<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-property tsd-has-type-parameter tsd-is-not-exported">
-									<li class="tsd-signature tsd-kind-icon">&lt;T, D&gt;<span class="tsd-signature-symbol">(</span>fn<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">function</span>, data<span class="tsd-signature-symbol">?: </span><a href="" class="tsd-signature-type">D</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></li>
-								</ul>
-								<ul class="tsd-descriptions">
-									<li class="tsd-description">
-										<h4 class="tsd-type-parameters-title">Type parameters</h4>
-										<ul class="tsd-type-parameters">
-											<li>
-												<h4>T</h4>
-											</li>
-											<li>
-												<h4>D</h4>
-											</li>
-										</ul>
-										<h4 class="tsd-parameters-title">Parameters</h4>
-										<ul class="tsd-parameters">
-											<li>
-												<h5>fn: <span class="tsd-signature-type">function</span></h5>
-												<ul class="tsd-parameters">
-													<li class="tsd-parameter-siganture">
-														<ul class="tsd-signatures tsd-kind-type-literal tsd-is-not-exported">
-															<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>data<span class="tsd-signature-symbol">?: </span><a href="" class="tsd-signature-type">D</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></li>
-														</ul>
-														<ul class="tsd-descriptions">
-															<li class="tsd-description">
-																<h4 class="tsd-parameters-title">Parameters</h4>
-																<ul class="tsd-parameters">
-																	<li>
-																		<h5><span class="tsd-flag ts-flagOptional">Optional</span> data: <a href="" class="tsd-signature-type">D</a></h5>
-																	</li>
-																</ul>
-																<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></h4>
-															</li>
-														</ul>
-													</li>
-												</ul>
-											</li>
-											<li>
-												<h5><span class="tsd-flag ts-flagOptional">Optional</span> data: <a href="" class="tsd-signature-type">D</a></h5>
-											</li>
-										</ul>
-										<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></h4>
-									</li>
-								</ul>
-							</li>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="port2" class="tsd-anchor"></a>
+					<h3>port2</h3>
+					<div class="tsd-signature tsd-kind-icon">port2<span class="tsd-signature-symbol">:</span> <a href="workerthreads._worker_threads_.messageport.html" class="tsd-signature-type">MessagePort</a></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/psastras/node-threadpool/blob/bf7348e/lib/worker_threads.d.ts#L10">worker_threads.d.ts:10</a></li>
 						</ul>
-					</div>
+					</aside>
 				</section>
 			</section>
 		</div>
@@ -172,18 +133,45 @@
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
+					<li class=" tsd-kind-enum tsd-parent-kind-module">
+						<a href="../enums/workerthreads._worker_threads_.messageportevent.html" class="tsd-kind-icon">Message<wbr>Port<wbr>Event</a>
+					</li>
 				</ul>
 				<ul class="current">
-					<li class="current tsd-kind-interface tsd-parent-kind-module">
-						<a href="threadpool.threadpool-1.ithreadpool.html" class="tsd-kind-icon">IThread<wbr>Pool</a>
+					<li class="current tsd-kind-class tsd-parent-kind-module">
+						<a href="workerthreads._worker_threads_.messagechannel.html" class="tsd-kind-icon">Message<wbr>Channel</a>
 						<ul>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="threadpool.threadpool-1.ithreadpool.html#submit" class="tsd-kind-icon">submit</a>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="workerthreads._worker_threads_.messagechannel.html#port1" class="tsd-kind-icon">port1</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="workerthreads._worker_threads_.messagechannel.html#port2" class="tsd-kind-icon">port2</a>
 							</li>
 						</ul>
 					</li>
 				</ul>
 				<ul class="after-current">
+					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="workerthreads._worker_threads_.messageport.html" class="tsd-kind-icon">Message<wbr>Port</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="workerthreads._worker_threads_.worker.html" class="tsd-kind-icon">Worker</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-parent-kind-module">
+						<a href="../interfaces/workerthreads._worker_threads_.workeroptions.html" class="tsd-kind-icon">Worker<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-variable tsd-parent-kind-module">
+						<a href="../modules/workerthreads._worker_threads_.html#ismainthread" class="tsd-kind-icon">is<wbr>Main<wbr>Thread</a>
+					</li>
+					<li class=" tsd-kind-variable tsd-parent-kind-module">
+						<a href="../modules/workerthreads._worker_threads_.html#parentport" class="tsd-kind-icon">parent<wbr>Port</a>
+					</li>
+					<li class=" tsd-kind-variable tsd-parent-kind-module">
+						<a href="../modules/workerthreads._worker_threads_.html#threadid" class="tsd-kind-icon">thread<wbr>Id</a>
+					</li>
+					<li class=" tsd-kind-variable tsd-parent-kind-module">
+						<a href="../modules/workerthreads._worker_threads_.html#workerdata" class="tsd-kind-icon">worker<wbr>Data</a>
+					</li>
 				</ul>
 			</nav>
 		</div>
