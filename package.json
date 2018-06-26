@@ -31,6 +31,7 @@
     "dev:rollup": "rollup -c -w",
     "dev:ava": "cross-env NODE_OPTIONS=--experimental-worker ava --watch",
     "test": "cross-env NODE_OPTIONS=--experimental-worker nyc ava",
+    "test:report": "nyc report --reporter=cobertura",
     "semantic-release": "semantic-release"
   },
   "dependencies": {

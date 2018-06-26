@@ -40,5 +40,8 @@ jobs:
           name: release
           command: npm run semantic-release || true
 
+      # generate coverage report
+      - run: npm run test:report
+
       # publish code coverage
       - run: npm run codecov
