@@ -4,7 +4,11 @@
     "moduleResolution": "node",
     "declaration": true,
     "sourceMap": true,
-    "strict": true
+    "strict": true,
+    "baseUrl": "../",
+    "paths": {
+      "*": ["typings/*", "node_modules/*", "test/*"]
+    }
   },
   "include": ["."]
 }
