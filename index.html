@@ -153,10 +153,12 @@ map.set(<span class="hljs-string">"key"</span>, <span class="hljs-string">"value
 <span class="hljs-built_in">console</span>.log(<span class="hljs-keyword">await</span> result); <span class="hljs-comment">// prints "value"</span>
 </code></pre>
 				<h3 id="shared-data">Shared Data</h3>
+				<h4 id="simple-shared-array-buffer">Simple shared array buffer</h4>
 				<pre><code class="lang-typescript"><span class="hljs-keyword">const</span> buffer = <span class="hljs-keyword">new</span> SharedArrayBuffer(<span class="hljs-number">1</span> * <span class="hljs-built_in">Int32Array</span>.BYTES_PER_ELEMENT);
 <span class="hljs-keyword">const</span> array = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Int32Array</span>(sharedBuffer);
 
 <span class="hljs-comment">// theres no lock, so in order to write safely we'll use one thread for this toy example</span>
+<span class="hljs-comment">// see the next example for atomic usage</span>
 <span class="hljs-keyword">const</span> pool = Executors.newSingleThreadedExecutor();
 
 <span class="hljs-comment">// set the data in the shared buffer to 42</span>
@@ -167,7 +169,21 @@ map.set(<span class="hljs-string">"key"</span>, <span class="hljs-string">"value
 
 <span class="hljs-built_in">console</span>.log(<span class="hljs-keyword">await</span> result); <span class="hljs-comment">// prints 42</span>
 </code></pre>
-				<h2 id="todos">TODOs</h2>
+				<h4 id="atomics">Atomics</h4>
+				<pre><code><span class="hljs-keyword">const</span> buffer = <span class="hljs-keyword">new</span> SharedArrayBuffer(<span class="hljs-number">1</span> * <span class="hljs-built_in">Int32Array</span>.BYTES_PER_ELEMENT);
+<span class="hljs-keyword">const</span> array = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Int32Array</span>(buffer);
+<span class="hljs-keyword">const</span> pool = Executors.newSingleThreadedExecutor();
+
+<span class="hljs-keyword">const</span> result = pool.submit(<span class="hljs-keyword">async</span> d =&gt; {
+  <span class="hljs-keyword">const</span> view = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Int32Array</span>(d);
+  Atomics.wait(view, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>); <span class="hljs-comment">// wait here until the value is no longer 0</span>
+  <span class="hljs-keyword">return</span> Atomics.load(view, <span class="hljs-number">0</span>);
+}, buffer);
+
+Atomics.store(array, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>); <span class="hljs-comment">// change the value from 0, unblocking the worker thread</span>
+
+<span class="hljs-built_in">console</span>.log(<span class="hljs-keyword">await</span> result); <span class="hljs-comment">// prints 1</span>
+</code></pre><h2 id="todos">TODOs</h2>
 				<ul>
 					<li>Figure out better function / data serialization.</li>
 					<li>Support cached thread executor</li>
