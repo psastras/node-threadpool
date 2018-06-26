@@ -67,9 +67,16 @@
 					<a href="https://badge.fury.io/js/node-threadpool"><img src="https://badge.fury.io/js/node-threadpool.svg" alt="npm version"></a>
 				<a href="https://github.com/semantic-release/semantic-release"><img src="https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg" alt="semantic-release"></a></p>
 				<p><strong>WARNING: This project is mostly experimental and the API is subject to change.</strong></p>
-				<p>This package implements thread pools for node 10.5&#39;s new worker thread API (see: <a href="https://nodejs.org/api/worker_threads.html)">https://nodejs.org/api/worker_threads.html)</a>. Supports transpiled code (ex: you may use Typescript to define your workers).</p>
+				<p>This package implements thread pools using node 10.5&#39;s new worker thread API (see: <a href="https://nodejs.org/api/worker_threads.html)">https://nodejs.org/api/worker_threads.html)</a>.</p>
+				<h2 id="features">Features</h2>
+				<ul>
+					<li>Lightweight: zero dependencies</li>
+					<li>Simple API: submit a function, await a result (no need to mess with loading from files, strings, etc.)</li>
+					<li>Supports transpiled code (ex: you may use Typescript to define your workers)</li>
+					<li>Typesafe (if you&#39;re using Typescript, you can write workers with type inference)</li>
+				</ul>
 				<h2 id="usage">Usage</h2>
-				<p><a href="https://psastras.github.io/node-threadpool/modules/executors.html">https://psastras.github.io/node-threadpool/modules/executors.html</a></p>
+				<p>Full API documentation can be found here: <a href="https://psastras.github.io/node-threadpool/modules/executors.html">https://psastras.github.io/node-threadpool/modules/executors.html</a>.</p>
 				<p>If you&#39;re familiar with Java&#39;s thread pool API, this should be very familiar:</p>
 				<pre><code class="lang-javascript"><span class="hljs-keyword">import</span> { Executors } <span class="hljs-keyword">from</span> <span class="hljs-string">"node-threadpool"</span>;
 
@@ -113,6 +120,7 @@
 <span class="hljs-built_in">console</span>.log(<span class="hljs-keyword">await</span> result2); <span class="hljs-comment">// joins and prints "done2"</span>
 </code></pre>
 				<p>See the <a href="https://psastras.github.io/node-threadpool/">documentation</a> for full API details.</p>
+				<p>Note: if you&#39;re not using async / await, Promise based functions work just as well.</p>
 				<h3 id="warning">Warning</h3>
 				<p>You may only access data within the runnable functions context. For example, this is an error:</p>
 				<pre><code class="lang-javascript"><span class="hljs-keyword">const</span> hello = <span class="hljs-string">"hello"</span>;
@@ -128,6 +136,20 @@
   <span class="hljs-keyword">const</span> fs = <span class="hljs-built_in">require</span>(<span class="hljs-string">'fs'</span>);
   fs.readFileSync(<span class="hljs-string">'README'</span>);
 });
+</code></pre>
+				<h2 id="examples">Examples</h2>
+				<h3 id="basic-usage">Basic Usage</h3>
+				<pre><code class="lang-typescript"><span class="hljs-keyword">const</span> pool = Executors.newFixedThreadPool(<span class="hljs-number">4</span>);
+<span class="hljs-keyword">const</span> result = pool.submit(<span class="hljs-keyword">async</span> () =&gt; <span class="hljs-string">"hello world"</span>);
+<span class="hljs-built_in">console</span>.log(<span class="hljs-keyword">await</span> result); <span class="hljs-comment">// prints "hello world"</span>
+</code></pre>
+				<h3 id="pass-data">Pass Data</h3>
+				<pre><code class="lang-typescript"><span class="hljs-keyword">const</span> pool = Executors.newSingleThreadedExecutor();
+<span class="hljs-keyword">const</span> data = {
+  answerToLife: <span class="hljs-number">42</span>
+};
+<span class="hljs-keyword">const</span> result = pool.submit(<span class="hljs-keyword">async</span> d =&gt; d.answerToLife, data);
+<span class="hljs-built_in">console</span>.log(<span class="hljs-keyword">await</span> result); <span class="hljs-comment">// prints "42"</span>
 </code></pre>
 				<h2 id="todos">TODOs</h2>
 				<ul>
