@@ -25,6 +25,7 @@
     "build:types": "cpx lib/**/*.d.ts dist",
     "build:doc": "typedoc --includeDeclarations --excludeExternals --out doc",
     "commitmsg": "commitlint -E GIT_PARAMS",
+    "precommit": "pretty-quick --staged",
     "dev": "npm-run-all --parallel dev:*",
     "dev:rollup": "rollup -c -w",
     "dev:ava": "cross-env NODE_OPTIONS=--experimental-worker ava --watch",
