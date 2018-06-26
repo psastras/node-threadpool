@@ -8,7 +8,10 @@
     "worker",
     "typescript",
     "concurrency",
-    "node"
+    "node",
+    "worker_thread",
+    "atomics",
+    "sharedarraybuffer"
   ],
   "main": "dist/node-threadpool.umd.js",
   "module": "dist/node-threadpool.es.js",

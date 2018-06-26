@@ -15,7 +15,6 @@ This package implements thread pools using node 10.5's new worker thread API (se
 - Lightweight: one dependency (`surrial`) for serialization
 - Simple API: submit a function, await a result (no need to mess with loading from files, strings, etc.)
 - Supports transpiled code (ex: you may use Typescript to define your workers)
-- Typesafe (if you're using Typescript, you can write workers with type inference)
 - Can send most types of data including maps, sets, etc.
 - Supports shared data between threads, see the [example](#Shared-Data)
 
