@@ -100,3 +100,19 @@ test("can pass raw shared data", async t => {
   const result = pool.submit(async d => new Int32Array(d)[0], sharedBuffer);
   t.is(await result, 3);
 });
+
+test.only("atomic lock", async t => {
+  const buffer = new SharedArrayBuffer(1 * Int32Array.BYTES_PER_ELEMENT);
+  const array = new Int32Array(buffer);
+  const pool = Executors.newSingleThreadedExecutor();
+
+  const result = pool.submit(async d => {
+    const view = new Int32Array(d);
+    Atomics.wait(view, 0, 0); // wait here until the value is no longer 0
+    return Atomics.load(view, 0);
+  }, buffer);
+
+  Atomics.store(array, 0, 1); // change the value from 0, unblocking the worker thread
+
+  t.is(await result, 1);
+});

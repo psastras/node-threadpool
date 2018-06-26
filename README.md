@@ -146,11 +146,14 @@ console.log(await result); // prints "value"
 
 ### Shared Data
 
+#### Simple shared array buffer
+
 ```typescript
 const buffer = new SharedArrayBuffer(1 * Int32Array.BYTES_PER_ELEMENT);
 const array = new Int32Array(sharedBuffer);
 
 // theres no lock, so in order to write safely we'll use one thread for this toy example
+// see the next example for atomic usage
 const pool = Executors.newSingleThreadedExecutor();
 
 // set the data in the shared buffer to 42
@@ -160,6 +163,24 @@ await pool.submit(async d => (new Int32Array(d)[0] = 42), buffer);
 const result = pool.submit(async d => new Int32Array(d)[0], buffer);
 
 console.log(await result); // prints 42
+```
+
+#### Atomics
+
+```
+const buffer = new SharedArrayBuffer(1 * Int32Array.BYTES_PER_ELEMENT);
+const array = new Int32Array(buffer);
+const pool = Executors.newSingleThreadedExecutor();
+
+const result = pool.submit(async d => {
+  const view = new Int32Array(d);
+  Atomics.wait(view, 0, 0); // wait here until the value is no longer 0
+  return Atomics.load(view, 0);
+}, buffer);
+
+Atomics.store(array, 0, 1); // change the value from 0, unblocking the worker thread
+
+console.log(await result); // prints 1
 ```
 
 ## TODOs
