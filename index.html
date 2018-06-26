@@ -70,10 +70,11 @@
 				<p>This package implements thread pools using node 10.5&#39;s new worker thread API (see: <a href="https://nodejs.org/api/worker_threads.html)">https://nodejs.org/api/worker_threads.html)</a>.</p>
 				<h2 id="features">Features</h2>
 				<ul>
-					<li>Lightweight: zero dependencies</li>
+					<li>Lightweight: one dependency (<code>surrial</code>)</li>
 					<li>Simple API: submit a function, await a result (no need to mess with loading from files, strings, etc.)</li>
 					<li>Supports transpiled code (ex: you may use Typescript to define your workers)</li>
 					<li>Typesafe (if you&#39;re using Typescript, you can write workers with type inference)</li>
+					<li>Can send most types of data including class instances to worker threads</li>
 				</ul>
 				<h2 id="why">Why</h2>
 				<p>Worker threads are usually expensive to create, a thread pool maintains the threads and allows you to submit work on the fly, without having to pay the cost of recreating threads.</p>
@@ -176,9 +177,6 @@
 					</li>
 					<li class=" tsd-kind-external-module">
 						<a href="modules/fixedthreadpool.html">Fixed<wbr>Thread<wbr>Pool</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="modules/serialize.html">Serialize</a>
 					</li>
 					<li class=" tsd-kind-external-module">
 						<a href="modules/threadpool.html">Thread<wbr>Pool</a>
