@@ -6,11 +6,18 @@
 
 **WARNING: This project is mostly experimental and the API is subject to change.**
 
-This package implements thread pools for node 10.5's new worker thread API (see: https://nodejs.org/api/worker_threads.html). Supports transpiled code (ex: you may use Typescript to define your workers).
+This package implements thread pools using node 10.5's new worker thread API (see: https://nodejs.org/api/worker_threads.html).
+
+## Features
+
+- Lightweight: zero dependencies
+- Simple API: submit a function, await a result (no need to mess with loading from files, strings, etc.)
+- Supports transpiled code (ex: you may use Typescript to define your workers)
+- Typesafe (if you're using Typescript, you can write workers with type inference)
 
 ## Usage
 
-https://psastras.github.io/node-threadpool/modules/executors.html
+Full API documentation can be found here: https://psastras.github.io/node-threadpool/modules/executors.html.
 
 If you're familiar with Java's thread pool API, this should be very familiar:
 
@@ -86,6 +93,8 @@ console.log(await result2); // joins and prints "done2"
 
 See the [documentation](https://psastras.github.io/node-threadpool/) for full API details.
 
+Note: if you're not using async / await, Promise based functions work just as well.
+
 ### Warning
 
 You may only access data within the runnable functions context. For example, this is an error:
@@ -110,6 +119,27 @@ await pool.submit(async () => {
   const fs = require('fs');
   fs.readFileSync('README');
 });
+```
+
+## Examples
+
+### Basic Usage
+
+```typescript
+const pool = Executors.newFixedThreadPool(4);
+const result = pool.submit(async () => "hello world");
+console.log(await result); // prints "hello world"
+```
+
+### Pass Data
+
+```typescript
+const pool = Executors.newSingleThreadedExecutor();
+const data = {
+  answerToLife: 42
+};
+const result = pool.submit(async d => d.answerToLife, data);
+console.log(await result); // prints "42"
 ```
 
 ## TODOs

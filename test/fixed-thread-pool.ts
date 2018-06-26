@@ -44,10 +44,7 @@ test("can pass data", async t => {
   const data = {
     answerToLife: 42
   };
-  const result = pool.submit(
-    async (d): Promise<number> => d.answerToLife,
-    data
-  );
+  const result = pool.submit(async d => d.answerToLife, data);
 
   t.is(await result, 42);
 });
