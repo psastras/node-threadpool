@@ -15,6 +15,12 @@ This package implements thread pools using node 10.5's new worker thread API (se
 - Supports transpiled code (ex: you may use Typescript to define your workers)
 - Typesafe (if you're using Typescript, you can write workers with type inference)
 
+## Why
+
+Worker threads are usually expensive to create, a thread pool maintains the threads and allows you to submit work on the fly, without having to pay the cost of recreating threads.
+
+With node's new `worker_thread` API, threads in the pool can pass messages to each other and read and write to shared memory.
+
 ## Usage
 
 Full API documentation can be found here: https://psastras.github.io/node-threadpool/modules/executors.html.

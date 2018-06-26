@@ -1,7 +1,14 @@
 /**
  * @module FixedThreadPool
  */
-import { MessageChannel, parentPort, Worker } from "worker_threads";
+
+import {
+  MessageChannel,
+  MessagePortEvent,
+  parentPort,
+  Worker,
+  WorkerOptions
+} from "worker_threads";
 import { serialize } from "./serialize";
 import { ThreadPool } from "./thread-pool";
 
@@ -55,12 +62,13 @@ export class FixedThreadPool implements ThreadPool.IThreadPool {
     ]
   >;
 
-  constructor(private numThreads: number) {
-    this.freeWorkers = Array.from(Array(numThreads).keys()).map(() => {
-      return new Worker(workerThread, {
-        eval: true
-      });
-    });
+  constructor(
+    private numThreads: number,
+    private workerOptions: WorkerOptions = {}
+  ) {
+    this.freeWorkers = Array.from(Array(numThreads).keys()).map(() =>
+      this.createWorker(workerOptions)
+    );
     this.queue = [];
   }
 
@@ -79,6 +87,13 @@ export class FixedThreadPool implements ThreadPool.IThreadPool {
           reject(new Error(msg));
         }
       );
+    });
+  };
+
+  private createWorker = (workerOptions: WorkerOptions): any => {
+    return new Worker(workerThread, {
+      ...workerOptions,
+      eval: true
     });
   };
 
