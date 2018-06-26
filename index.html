@@ -66,6 +66,7 @@
 				<p><strong>WARNING: This is mostly experimental and the API is subject to change.</strong></p>
 				<p>This package implements thread pools for node 10.5&#39;s new worker thread API (see: <a href="https://nodejs.org/api/worker_threads.html)">https://nodejs.org/api/worker_threads.html)</a>.</p>
 				<h2 id="usage">Usage</h2>
+				<p><a href="https://psastras.github.io/node-threadpool/modules/executors.html">https://psastras.github.io/node-threadpool/modules/executors.html</a></p>
 				<p>If you&#39;re familiar with Java&#39;s thread pool API, this should be very familiar:</p>
 				<pre><code class="lang-javascript"><span class="hljs-keyword">import</span> { Executors } <span class="hljs-keyword">from</span> <span class="hljs-string">"node-threadpool"</span>;
 
@@ -90,12 +91,12 @@
 				<pre><code class="lang-sh">yarn add node-threadpool
 </code></pre>
 				<p>or</p>
-				<pre><code class="lang-sh">npm add node-threadpool
+				<pre><code class="lang-sh">npm install node-threadpool
 </code></pre>
 				<p>Import <code>node-threadpool</code>:</p>
 				<pre><code class="lang-javascript"><span class="hljs-keyword">import</span> { Executors } <span class="hljs-keyword">from</span> <span class="hljs-string">"node-threadpool"</span>;
 </code></pre>
-				<p>Executors contains methods to create different thread pools.</p>
+				<p><a href="https://psastras.github.io/node-threadpool/modules/executors.html">Executors</a> contains methods to create different thread pools.</p>
 				<p>Create a thread pool by calling one of these methods:</p>
 				<pre><code class="lang-javascript"><span class="hljs-comment">// creates a thread pool with 4 threads</span>
 <span class="hljs-keyword">const</span> pool = Executors.newFixedThreadPool(<span class="hljs-number">4</span>);
@@ -108,7 +109,7 @@
 <span class="hljs-built_in">console</span>.log(<span class="hljs-keyword">await</span> result1); <span class="hljs-comment">// joins and prints "done1"</span>
 <span class="hljs-built_in">console</span>.log(<span class="hljs-keyword">await</span> result2); <span class="hljs-comment">// joins and prints "done2"</span>
 </code></pre>
-				<p>See the documentation for full API details.</p>
+				<p>See the <a href="https://psastras.github.io/node-threadpool/">documentation</a> for full API details.</p>
 				<h2 id="todos">TODOs</h2>
 				<ul>
 					<li>Figure out better function / data serialization.</li>
