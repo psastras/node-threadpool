@@ -1,7 +1,15 @@
 {
   "name": "node-threadpool",
   "version": "0.0.0-development",
-  "description": "Thread pool constructs using node 10.5's new worker-thread package",
+  "description": "Thread pools using node's new worker_thread package",
+  "keywords": [
+    "thread",
+    "threadpool",
+    "worker",
+    "typescript",
+    "concurrency",
+    "node"
+  ],
   "main": "dist/node-threadpool.umd.js",
   "module": "dist/node-threadpool.es.js",
   "jsnext:main": "dist/node-threadpool.es.js",
