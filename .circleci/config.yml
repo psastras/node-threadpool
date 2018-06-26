@@ -6,6 +6,7 @@ jobs:
         - gh-pages
     docker:
       - image: circleci/node:10.5
+      - image: circleci/python:3.6.1
 
     working_directory: ~/repo
 
@@ -20,12 +21,13 @@ jobs:
           - v1-dependencies-
 
       - run: npm ci
+      - run: sudo pip install codecov
 
       - save_cache:
           paths:
             - node_modules
           key: v1-dependencies-{{ checksum "package-lock.json" }}
-        
+
       # run tests!
       - run: npm test
 
@@ -35,6 +37,10 @@ jobs:
       # commit docs
       - run: sh github-page.sh
 
+      # publish to npm
       - run:
           name: release
           command: npm run semantic-release || true
+
+      # publish code coverage
+      - run: codecov
