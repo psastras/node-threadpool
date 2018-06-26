@@ -58,3 +58,14 @@ test("can pass data with functions", async t => {
 
   t.is(await result, 42);
 });
+
+test("can pass data with maps", async t => {
+  const pool = Executors.newSingleThreadedExecutor();
+  const map = new Map();
+  map.set("key", "value");
+  const data = {
+    map
+  };
+  const result = pool.submit(async d => d.map.get("key"), data);
+  t.is(await result, "value");
+});

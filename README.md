@@ -14,7 +14,7 @@ This package implements thread pools using node 10.5's new worker thread API (se
 - Simple API: submit a function, await a result (no need to mess with loading from files, strings, etc.)
 - Supports transpiled code (ex: you may use Typescript to define your workers)
 - Typesafe (if you're using Typescript, you can write workers with type inference)
-- Can send most types of data including class instances to worker threads
+- Can send most types of data including maps, sets, etc.
 
 ## Why
 
@@ -142,11 +142,13 @@ console.log(await result); // prints "hello world"
 
 ```typescript
 const pool = Executors.newSingleThreadedExecutor();
+const map = new Map();
+map.set("key", "value");
 const data = {
-  answerToLife: 42
+  map
 };
-const result = pool.submit(async d => d.answerToLife, data);
-console.log(await result); // prints "42"
+const result = pool.submit(async d => d.map.get("key"), data);
+console.log(await result); // prints "value"
 ```
 
 ## TODOs
