@@ -101,7 +101,7 @@ test("can pass raw shared data", async t => {
   t.is(await result, 3);
 });
 
-test.only("atomic lock", async t => {
+test("atomic lock", async t => {
   const buffer = new SharedArrayBuffer(1 * Int32Array.BYTES_PER_ELEMENT);
   const array = new Int32Array(buffer);
   const pool = Executors.newSingleThreadedExecutor();
