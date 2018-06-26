@@ -95,6 +95,13 @@ const hello = "hello";
 await pool.submit(async () => hello);
 ```
 
+Instead, use the optional `data` object when submitting the function:
+
+```javascript
+const hello = "hello";
+await pool.submit(async (data) => data.hello, hello);
+```
+
 Similarly you must require third party modules from _inside_ the run method:
 
 ```javascript

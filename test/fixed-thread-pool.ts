@@ -38,3 +38,16 @@ test("works with typescript", async t => {
 
   t.is(await result, 42);
 });
+
+test("can pass data", async t => {
+  const pool = Executors.newSingleThreadedExecutor();
+  const data = {
+    answerToLife: 42
+  };
+  const result = pool.submit(
+    async (d): Promise<number> => d.answerToLife,
+    data
+  );
+
+  t.is(await result, 42);
+});

@@ -4,6 +4,6 @@
 
 export namespace ThreadPool {
   export interface IThreadPool {
-    submit: <T>(fn: () => Promise<T>) => Promise<T>;
+    submit: <T, D>(fn: (data?: D) => Promise<T>, data?: D) => Promise<T>;
   }
 }
