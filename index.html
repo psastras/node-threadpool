@@ -74,7 +74,7 @@
 					<li>Simple API: submit a function, await a result (no need to mess with loading from files, strings, etc.)</li>
 					<li>Supports transpiled code (ex: you may use Typescript to define your workers)</li>
 					<li>Typesafe (if you&#39;re using Typescript, you can write workers with type inference)</li>
-					<li>Can send most types of data including class instances to worker threads</li>
+					<li>Can send most types of data including maps, sets, etc.</li>
 				</ul>
 				<h2 id="why">Why</h2>
 				<p>Worker threads are usually expensive to create, a thread pool maintains the threads and allows you to submit work on the fly, without having to pay the cost of recreating threads.</p>
@@ -149,11 +149,13 @@
 </code></pre>
 				<h3 id="pass-data">Pass Data</h3>
 				<pre><code class="lang-typescript"><span class="hljs-keyword">const</span> pool = Executors.newSingleThreadedExecutor();
+<span class="hljs-keyword">const</span> map = <span class="hljs-keyword">new</span> Map();
+map.set(<span class="hljs-string">"key"</span>, <span class="hljs-string">"value"</span>);
 <span class="hljs-keyword">const</span> data = {
-  answerToLife: <span class="hljs-number">42</span>
+  map
 };
-<span class="hljs-keyword">const</span> result = pool.submit(<span class="hljs-keyword">async</span> d =&gt; d.answerToLife, data);
-<span class="hljs-built_in">console</span>.log(<span class="hljs-keyword">await</span> result); <span class="hljs-comment">// prints "42"</span>
+<span class="hljs-keyword">const</span> result = pool.submit(<span class="hljs-keyword">async</span> d =&gt; d.map.get(<span class="hljs-string">"key"</span>), data);
+<span class="hljs-built_in">console</span>.log(<span class="hljs-keyword">await</span> result); <span class="hljs-comment">// prints "value"</span>
 </code></pre>
 				<h2 id="todos">TODOs</h2>
 				<ul>
