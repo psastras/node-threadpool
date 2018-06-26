@@ -33,14 +33,7 @@ export default {
 
   output: [
     {
-      file: pkg.main,
-      format: "umd",
-      name: "node-threadpool",
-      sourcemap: true,
-      globals: ["worker_threads"]
-    },
-    {
-      file: pkg.module,
+      file: "dist/workers/fixed-thread-pool-worker.js",
       format: "es",
       sourcemap: true,
       globals: ["worker_threads"]
