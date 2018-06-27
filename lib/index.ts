@@ -2,8 +2,8 @@
  * @module Executors
  */
 
-import { FixedThreadPool } from "./fixed-thread-pool";
-import { ThreadPool } from "./thread-pool";
+import { FixedThreadPool } from "./thread-pool/fixed-thread-pool";
+import { ThreadPool } from "./thread-pool/thread-pool";
 
 /**
  * Utility methods for creating different types of thread pools.
