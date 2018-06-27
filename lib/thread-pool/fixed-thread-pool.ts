@@ -16,15 +16,15 @@ import { ThreadPool } from "./thread-pool";
 const workerThread = `
 const { parentPort } = require('worker_threads');
 const { serialize, deserialize } = require('surrial');
-parentPort.on('message', ({ value, port, runnable, data, rawData }) => {
-  if (value === "__run__") {
+parentPort.on('message', ({ action, payload: { port, runnable, data, rawData } }) => {
+  if (action === "__run__") {
     try {
       const hydratedData = data && (data instanceof SharedArrayBuffer ? data : Object.assign(deserialize(data), rawData));
       deserialize(runnable)(hydratedData).then((result) => {
-        port.postMessage({ value: "__result__", result: serialize(result) });
+        port.postMessage({ action: "__result__", payload: { result: serialize(result) } });
       })
     } catch (e) {
-      port.postMessage({ value: "__error__", result: serialize(e), msg: e.message });
+      port.postMessage({ action: "__error__", payload: { result: serialize(e), msg: e.message, error: true } });
     }
   }
 });
@@ -108,33 +108,36 @@ export class FixedThreadPool implements ThreadPool.IThreadPool {
 
       worker.postMessage(
         {
-          data:
-            data instanceof SharedArrayBuffer || !data
-              ? data
-              : serialize(data) || {},
-          port: subChannel.port1,
-          rawData,
-          runnable: serialize(runnable),
-          value: "__run__"
+          action: "__run__",
+          payload: {
+            data:
+              data instanceof SharedArrayBuffer || !data
+                ? data
+                : serialize(data) || {},
+            port: subChannel.port1,
+            rawData,
+            runnable: serialize(runnable)
+          }
         },
         [subChannel.port1]
       );
       subChannel.port2.on(
         "message",
         ({
-          result,
-          value,
-          msg
+          action,
+          payload: { result, msg }
         }: {
-          result: any;
-          value: string;
-          msg: string;
+          action: string;
+          payload: {
+            result: any;
+            msg: string;
+          };
         }) => {
-          if (value === "__result__") {
+          if (action === "__result__") {
             this.freeWorkers.push(worker);
             this.executeNext();
             success(deserialize(result));
-          } else if (value === "__error__") {
+          } else if (action === "__error__") {
             this.freeWorkers.push(worker);
             this.executeNext();
             const e = deserialize(result);
