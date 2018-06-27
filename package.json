@@ -36,7 +36,7 @@
     "dev": "npm-run-all --parallel dev:*",
     "dev:lib": "rollup -c lib/rollup.config.js -w",
     "dev:ava": "cross-env NODE_OPTIONS=--experimental-worker ava --watch",
-    "dev:doc": "npm run build:doc && gitbook serve",
+    "dev:doc": "npm run build:doc && gitbook serve . dist/docs",
     "test": "cross-env NODE_OPTIONS=--experimental-worker nyc ava",
     "test:report": "nyc report --reporter=cobertura",
     "semantic-release": "semantic-release"
