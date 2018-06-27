@@ -57,6 +57,8 @@
     <link rel="shortcut icon" href="gitbook/images/favicon.ico" type="image/x-icon">
 
     
+    <link rel="next" href="examples/" />
+    
     
 
     </head>
@@ -98,12 +100,96 @@
             
         </li>
     
-        <li class="chapter " data-level="1.2" >
+        <li class="chapter " data-level="1.2" data-path="examples/">
             
-                <a target="_blank" href="https://github.com/psastras/node-threadpool/api">
+                <a href="examples/">
+            
+                    
+                    Examples
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.1" data-path="examples/">
+            
+                <a href="examples/#basic-usage">
+            
+                    
+                    Basic
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.2" data-path="examples/">
+            
+                <a href="examples/#passing-data">
+            
+                    
+                    Passing Data
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3" data-path="examples/">
+            
+                <a href="examples/#shared-array-buffers">
+            
+                    
+                    Shared Array Buffers
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.4" data-path="examples/">
+            
+                <a href="examples/#atomics">
+            
+                    
+                    Atomics
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" >
+            
+                <a target="_blank" href="https://psastras.github.io/node-threadpool/api/">
             
                     
                     API Reference
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" >
+            
+                <a target="_blank" href="https://github.com/psastras/node-threadpool">
+            
+                    
+                    Github
             
                 </a>
             
@@ -157,136 +243,34 @@
                                 <section class="normal markdown-section">
                                 
                                 <h1 id="node-threadpool">node-threadpool</h1>
+<p><strong>WARNING: This project is mostly experimental and the API is subject to change.</strong></p>
+<p>This package implements thread pools using node 10.5&apos;s new worker thread API (see: <a href="https://nodejs.org/api/worker_threads.html" target="_blank">https://nodejs.org/api/worker_threads.html</a>).</p>
+<p>It supports an easy to use Promise based API to spawn and transfer data to and from threads.</p>
+<p>Unlike <code>cluster</code> or other similar node threading libraries, worker threads are native threads and support message passing as well as shared memory and atomic operations.</p>
 <p><a href="https://circleci.com/gh/psastras/node-threadpool" target="_blank"><img src="https://circleci.com/gh/psastras/node-threadpool.svg?style=svg" alt="CircleCI"></a>
 <a href="https://badge.fury.io/js/node-threadpool" target="_blank"><img src="https://badge.fury.io/js/node-threadpool.svg" alt="npm version"></a>
 <a href="https://codecov.io/gh/psastras/node-threadpool" target="_blank"><img src="https://codecov.io/gh/psastras/node-threadpool/branch/master/graph/badge.svg" alt="codecov"></a>
 <a href="https://david-dm.org/psastras/node-threadpool" target="_blank"><img src="https://david-dm.org/psastras/node-threadpool/status.svg" alt="dependencies Status"></a>
 <a href="https://github.com/semantic-release/semantic-release" target="_blank"><img src="https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg" alt="semantic-release"></a></p>
-<p><strong>WARNING: This project is mostly experimental and the API is subject to change.</strong></p>
-<p>This package implements thread pools using node 10.5&apos;s new worker thread API (see: <a href="https://nodejs.org/api/worker_threads.html" target="_blank">https://nodejs.org/api/worker_threads.html</a>).</p>
-<h2 id="features">Features</h2>
-<ul>
-<li>Lightweight: one dependency (<code>surrial</code>) for serialization</li>
-<li>Simple API: submit a function, await a result (no need to mess with loading from files, strings, etc.)</li>
-<li>Supports transpiled code (ex: you may use Typescript to define your workers)</li>
-<li>Can send most types of data including maps, sets, etc.</li>
-<li>Supports shared data between threads, see the <a href="#Shared-Data">example</a></li>
-</ul>
-<h2 id="why">Why</h2>
-<p>Worker threads are usually expensive to create, a thread pool maintains the threads and allows you to submit work on the fly, without having to pay the cost of recreating threads.</p>
-<p>With node&apos;s new <code>worker_thread</code> API, threads in the pool can pass messages to each other and read and write to shared memory.</p>
-<h2 id="usage">Usage</h2>
-<p>Full API documentation can be found here: <a href="https://psastras.github.io/node-threadpool/api/modules/executors.html" target="_blank">https://psastras.github.io/node-threadpool/api/modules/executors.html</a>.</p>
-<p>If you&apos;re familiar with Java&apos;s thread pool API, this should be very familiar:</p>
+<hr>
+<h2 id="quick-start">Quick Start</h2>
+<p>With npm,</p>
+<pre><code>npm i node-threadpool
+</code></pre><p>Or with yarn,</p>
+<pre><code>yarn add node-threadpool
+</code></pre><p>Then,</p>
 <pre><code class="lang-javascript"><span class="hljs-keyword">import</span> { Executors } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;node-threadpool&quot;</span>;
 
-<span class="hljs-keyword">const</span> pool = Executors.newFixedThreadPool(<span class="hljs-number">1</span>);
-<span class="hljs-keyword">const</span> result = pool.submit(<span class="hljs-keyword">async</span> () =&gt; <span class="hljs-string">&quot;hello world&quot;</span>);
-
-<span class="hljs-built_in">console</span>.log(<span class="hljs-keyword">await</span> result); <span class="hljs-comment">// prints &quot;hello world&quot;</span>
-</code></pre>
-<p><strong>Requires node 10.5+. You must run node with the <code>--experimental-worker</code> flag enabled.</strong></p>
-<pre><code>NODE_OPTIONS=--experimental-worker ./server.js
-</code></pre><p>or</p>
-<pre><code>node --experimental-worker ./server.js
-</code></pre><h3 id="detailed-usage-instructions">Detailed Usage Instructions</h3>
-<p>To install:</p>
-<pre><code class="lang-sh">yarn add node-threadpool
-</code></pre>
-<p>or</p>
-<pre><code class="lang-sh">npm install node-threadpool
-</code></pre>
-<p>Import <code>node-threadpool</code>:</p>
-<pre><code class="lang-javascript"><span class="hljs-keyword">import</span> { Executors } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;node-threadpool&quot;</span>;
-</code></pre>
-<p><a href="https://psastras.github.io/node-threadpool/api/modules/executors.html" target="_blank">Executors</a> contains methods to create different thread pools.</p>
-<p>Create a thread pool by calling one of these methods:</p>
-<pre><code class="lang-javascript"><span class="hljs-comment">// creates a thread pool with 4 threads</span>
+<span class="hljs-comment">// creates a thread pool with 4 threads</span>
 <span class="hljs-keyword">const</span> pool = Executors.newFixedThreadPool(<span class="hljs-number">4</span>);
-</code></pre>
-<p>Then submit work to the pool with the <code>submit</code> method. This method takes in a function with no arguments that returns a Promise. The <code>submit</code> method itself returns a Promise which is resolved when the function has been executed.</p>
-<pre><code class="lang-javascript"><span class="hljs-comment">// these execute in parallel (as long as the pool size &gt;= 2)</span>
+
+<span class="hljs-comment">// these execute in parallel (as long as the pool size &gt;= 2)</span>
 <span class="hljs-keyword">const</span> result1 = pool.submit(<span class="hljs-keyword">async</span> () =&gt; <span class="hljs-string">&quot;done 1&quot;</span>);
 <span class="hljs-keyword">const</span> result2 = pool.submit(<span class="hljs-keyword">async</span> () =&gt; <span class="hljs-string">&quot;done 2&quot;</span>);
 
 <span class="hljs-built_in">console</span>.log(<span class="hljs-keyword">await</span> result1); <span class="hljs-comment">// joins and prints &quot;done1&quot;</span>
 <span class="hljs-built_in">console</span>.log(<span class="hljs-keyword">await</span> result2); <span class="hljs-comment">// joins and prints &quot;done2&quot;</span>
 </code></pre>
-<p>See the <a href="https://psastras.github.io/node-threadpool/" target="_blank">documentation</a> for full API details.</p>
-<p>Note: if you&apos;re not using async / await, Promise based functions work just as well.</p>
-<h3 id="warning">Warning</h3>
-<p>You may only access data within the runnable function&apos;s context. For example, this is an error:</p>
-<pre><code class="lang-javascript"><span class="hljs-keyword">const</span> hello = <span class="hljs-string">&quot;hello&quot;</span>;
-<span class="hljs-keyword">await</span> pool.submit(<span class="hljs-keyword">async</span> () =&gt; hello);
-</code></pre>
-<p>Instead, use the optional <code>data</code> object when submitting the function:</p>
-<pre><code class="lang-javascript"><span class="hljs-keyword">const</span> hello = <span class="hljs-string">&quot;hello&quot;</span>;
-<span class="hljs-keyword">await</span> pool.submit(<span class="hljs-keyword">async</span> (data) =&gt; data, hello);
-</code></pre>
-<p>Similarly you must require third party modules from <em>inside</em> the run method:</p>
-<pre><code class="lang-javascript"><span class="hljs-keyword">await</span> pool.submit(<span class="hljs-keyword">async</span> () =&gt; {
-  <span class="hljs-keyword">const</span> fs = <span class="hljs-built_in">require</span>(<span class="hljs-string">&apos;fs&apos;</span>);
-  fs.readFileSync(<span class="hljs-string">&apos;README&apos;</span>);
-});
-</code></pre>
-<h2 id="examples">Examples</h2>
-<h3 id="basic-usage">Basic Usage</h3>
-<pre><code class="lang-typescript"><span class="hljs-keyword">const</span> pool = Executors.newFixedThreadPool(<span class="hljs-number">4</span>);
-<span class="hljs-keyword">const</span> result = pool.submit(async () =&gt; <span class="hljs-string">&quot;hello world&quot;</span>);
-<span class="hljs-built_in">console</span>.log(await result); <span class="hljs-comment">// prints &quot;hello world&quot;</span>
-</code></pre>
-<h3 id="pass-data">Pass Data</h3>
-<pre><code class="lang-typescript"><span class="hljs-keyword">const</span> pool = Executors.newSingleThreadedExecutor();
-<span class="hljs-keyword">const</span> map = <span class="hljs-keyword">new</span> Map();
-map.set(<span class="hljs-string">&quot;key&quot;</span>, <span class="hljs-string">&quot;value&quot;</span>);
-<span class="hljs-keyword">const</span> data = {
-  map
-};
-<span class="hljs-keyword">const</span> result = pool.submit(async d =&gt; d.map.get(<span class="hljs-string">&quot;key&quot;</span>), data);
-<span class="hljs-built_in">console</span>.log(await result); <span class="hljs-comment">// prints &quot;value&quot;</span>
-</code></pre>
-<h3 id="shared-data">Shared Data</h3>
-<h4 id="simple-shared-array-buffer">Simple shared array buffer</h4>
-<pre><code class="lang-typescript"><span class="hljs-keyword">const</span> buffer = <span class="hljs-keyword">new</span> SharedArrayBuffer(<span class="hljs-number">1</span> * <span class="hljs-built_in">Int32Array</span>.BYTES_PER_ELEMENT);
-<span class="hljs-keyword">const</span> array = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Int32Array</span>(sharedBuffer);
-
-<span class="hljs-comment">// theres no lock, so in order to write safely we&apos;ll use one thread for this toy example</span>
-<span class="hljs-comment">// see the next example for atomic usage</span>
-<span class="hljs-keyword">const</span> pool = Executors.newSingleThreadedExecutor();
-
-<span class="hljs-comment">// set the data in the shared buffer to 42</span>
-await pool.submit(async d =&gt; (<span class="hljs-keyword">new</span> <span class="hljs-built_in">Int32Array</span>(d)[<span class="hljs-number">0</span>] = <span class="hljs-number">42</span>), buffer);
-
-<span class="hljs-comment">// read the data from the shared buffer</span>
-<span class="hljs-keyword">const</span> result = pool.submit(async d =&gt; <span class="hljs-keyword">new</span> <span class="hljs-built_in">Int32Array</span>(d)[<span class="hljs-number">0</span>], buffer);
-
-<span class="hljs-built_in">console</span>.log(await result); <span class="hljs-comment">// prints 42</span>
-</code></pre>
-<h4 id="atomics">Atomics</h4>
-<pre><code class="lang-javascript"><span class="hljs-keyword">const</span> buffer = <span class="hljs-keyword">new</span> SharedArrayBuffer(<span class="hljs-number">1</span> * <span class="hljs-built_in">Int32Array</span>.BYTES_PER_ELEMENT);
-<span class="hljs-keyword">const</span> array = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Int32Array</span>(buffer);
-<span class="hljs-keyword">const</span> pool = Executors.newSingleThreadedExecutor();
-
-<span class="hljs-keyword">const</span> result = pool.submit(<span class="hljs-keyword">async</span> d =&gt; {
-  <span class="hljs-keyword">const</span> view = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Int32Array</span>(d);
-  Atomics.wait(view, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>); <span class="hljs-comment">// wait here until the value is no longer 0</span>
-  <span class="hljs-keyword">return</span> Atomics.load(view, <span class="hljs-number">0</span>);
-}, buffer);
-
-Atomics.store(array, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>); <span class="hljs-comment">// change the value from 0, unblocking the worker thread</span>
-
-<span class="hljs-built_in">console</span>.log(<span class="hljs-keyword">await</span> result); <span class="hljs-comment">// prints 1</span>
-</code></pre>
-<h2 id="todos">TODOs</h2>
-<ul>
-<li>Figure out better function / data serialization.</li>
-<li>Support cached thread executor</li>
-<li>Clean up code</li>
-<li>Settle on an API (when node&apos;s api is stable)</li>
-<li>Support nested shared buffer serialization</li>
-</ul>
-<h2 id="license">License</h2>
-<p>MIT Licensed, see the LICENSE file.</p>
 
                                 
                                 </section>
@@ -315,6 +299,10 @@ Atomics.store(array, <span class="hljs-number">0</span>, <span class="hljs-numbe
             
                 
                 
+                <a href="examples/" class="navigation navigation-next navigation-unique" aria-label="Next page: Examples">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
             
         
     </div>
@@ -322,7 +310,7 @@ Atomics.store(array, <span class="hljs-number">0</span>, <span class="hljs-numbe
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Introduction","level":"1.1","depth":1,"next":{"title":"API Reference","level":"1.2","depth":1,"url":"https://github.com/psastras/node-threadpool/api","ref":"https://github.com/psastras/node-threadpool/api","articles":[]},"dir":"ltr"},"config":{"plugins":[],"root":"./docs","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"gitbook":"3.2.2"},"file":{"path":"README.md","mtime":"2018-06-27T02:10:12.442Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2018-06-27T02:11:27.430Z"},"basePath":".","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Introduction","level":"1.1","depth":1,"next":{"title":"Examples","level":"1.2","depth":1,"path":"examples/README.md","ref":"examples/README.md","articles":[{"title":"Basic","level":"1.2.1","depth":2,"anchor":"#basic-usage","path":"examples/README.md","ref":"examples/README.md#basic-usage","articles":[]},{"title":"Passing Data","level":"1.2.2","depth":2,"anchor":"#passing-data","path":"examples/README.md","ref":"examples/README.md#passing-data","articles":[]},{"title":"Shared Array Buffers","level":"1.2.3","depth":2,"anchor":"#shared-array-buffers","path":"examples/README.md","ref":"examples/README.md#shared-array-buffers","articles":[]},{"title":"Atomics","level":"1.2.4","depth":2,"anchor":"#atomics","path":"examples/README.md","ref":"examples/README.md#atomics","articles":[]}]},"dir":"ltr"},"config":{"plugins":[],"root":"./docs","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"gitbook":"3.2.2"},"file":{"path":"README.md","mtime":"2018-06-27T03:10:02.301Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2018-06-27T03:11:30.888Z"},"basePath":".","book":{"language":""}});
         });
     </script>
 </div>

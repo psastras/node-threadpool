@@ -1,0 +1,389 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>Examples · GitBook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.2">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="./" />
+    
+    
+    <link rel="prev" href="../" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.2" data-path="./">
+            
+                <a href="./">
+            
+                    
+                    Examples
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.1" data-path="./">
+            
+                <a href="./#basic-usage">
+            
+                    
+                    Basic
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.2" data-path="./">
+            
+                <a href="./#passing-data">
+            
+                    
+                    Passing Data
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3" data-path="./">
+            
+                <a href="./#shared-array-buffers">
+            
+                    
+                    Shared Array Buffers
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.4" data-path="./">
+            
+                <a href="./#atomics">
+            
+                    
+                    Atomics
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" >
+            
+                <a target="_blank" href="https://psastras.github.io/node-threadpool/api/">
+            
+                    
+                    API Reference
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" >
+            
+                <a target="_blank" href="https://github.com/psastras/node-threadpool">
+            
+                    
+                    Github
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >Examples</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="examples">Examples</h1>
+<h2 id="basic-usage">Basic Usage</h2>
+<p>To submit work to a thread pool, create a method which returns a promise.</p>
+<p>In this example, the method is declared inline and returns a <code>Promise&lt;string&gt;</code>.</p>
+<p>After completion of work, the thread pool resolves the promise with the value.</p>
+<p>We use <code>await</code> to wait until the result is available then print it to <code>console.log</code>.</p>
+<pre><code class="lang-typescript"><span class="hljs-keyword">const</span> pool = Executors.newFixedThreadPool(<span class="hljs-number">4</span>);
+<span class="hljs-keyword">const</span> result = pool.submit(async () =&gt; <span class="hljs-string">&quot;hello world&quot;</span>);
+<span class="hljs-built_in">console</span>.log(await result); <span class="hljs-comment">// prints &quot;hello world&quot;</span>
+</code></pre>
+<h2 id="passing-data">Passing Data</h2>
+<p>Thread pool functions cannot access data outside of the function&apos;s context. This is because the worker runs in a separate thread and cannot access data in the main thread.</p>
+<p>The easiest way to get data into the worker thread is to copy it. This can be done by providing <code>submit</code> two arguments (the first is the runnable function, the second is the data to copy).</p>
+<p>Most standard data is supported. Class instances and data with circular references notably are not supported.</p>
+<p>Note that each worker receives a <em>copy</em> of the data -- changes made within each thread do not affect the original data.</p>
+<p>In the following example, a Map is copied into the worker thread for data access.</p>
+<pre><code class="lang-typescript"><span class="hljs-keyword">const</span> pool = Executors.newSingleThreadedExecutor();
+<span class="hljs-keyword">const</span> map = <span class="hljs-keyword">new</span> Map();
+map.set(<span class="hljs-string">&quot;key&quot;</span>, <span class="hljs-string">&quot;value&quot;</span>);
+<span class="hljs-keyword">const</span> data = {
+  map
+};
+<span class="hljs-keyword">const</span> result = pool.submit(async d =&gt; d.map.get(<span class="hljs-string">&quot;key&quot;</span>), data);
+<span class="hljs-built_in">console</span>.log(await result); <span class="hljs-comment">// prints &quot;value&quot;</span>
+</code></pre>
+<h2 id="shared-array-buffers">Shared Array Buffers</h2>
+<p>Node&apos;s <code>worker_thread</code> API supports shared memory between threads. Unlike copying data directly to each worker, shared memory avoids the copy overhead and allows threads to communicate to each other by reading and writing to the same area of memory.</p>
+<p><code>node-threadpool</code> supports shared memory -- if you pass data of type
+<code>SharedArrayBuffer</code> in the <code>submit</code> function, it will automatically be accessible from each thread.</p>
+<p>In the following example, a shared buffer is created to hold a single integer. This integer is then written to in the first thread, and read and returned in the second thead. Note that we could also read and write to the same buffer from the main thread.</p>
+<p>Also note that a single thread executor is used to avoid concurrent threads reading and writing to the same memory at the same time (see the next example using Atomics which does this safely).</p>
+<pre><code class="lang-javascript"><span class="hljs-keyword">const</span> buffer = <span class="hljs-keyword">new</span> SharedArrayBuffer(<span class="hljs-number">1</span> * <span class="hljs-built_in">Int32Array</span>.BYTES_PER_ELEMENT);
+<span class="hljs-keyword">const</span> array = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Int32Array</span>(sharedBuffer); <span class="hljs-comment">// provide a view onto the buffer</span>
+
+<span class="hljs-comment">// theres no lock, so in order to write safely we&apos;ll use one thread for this toy example</span>
+<span class="hljs-comment">// see the next example for atomic usage</span>
+<span class="hljs-keyword">const</span> pool = Executors.newSingleThreadedExecutor();
+
+<span class="hljs-comment">// set the data in the shared buffer to 42</span>
+<span class="hljs-keyword">await</span> pool.submit(<span class="hljs-keyword">async</span> d =&gt; (<span class="hljs-keyword">new</span> <span class="hljs-built_in">Int32Array</span>(d)[<span class="hljs-number">0</span>] = <span class="hljs-number">42</span>), buffer);
+
+<span class="hljs-comment">// read the data from the shared buffer</span>
+<span class="hljs-keyword">const</span> result = pool.submit(<span class="hljs-keyword">async</span> d =&gt; <span class="hljs-keyword">new</span> <span class="hljs-built_in">Int32Array</span>(d)[<span class="hljs-number">0</span>], buffer);
+
+<span class="hljs-built_in">console</span>.log(<span class="hljs-keyword">await</span> result); <span class="hljs-comment">// prints 42</span>
+</code></pre>
+<h2 id="atomics">Atomics</h2>
+<p>For threads to access and write to the same elements in <code>SharedArrayBuffers</code>, Atomic operations are needed (ex. to implment locks and mutexes). In this example, the same area of memory is accessed in the main thread and the worker thread.</p>
+<p>The worker thread waits until the memory has been changed (by the main thread&apos;s <code>Atomics.store</code>), then continues with its operation.</p>
+<pre><code class="lang-javascript"><span class="hljs-keyword">const</span> buffer = <span class="hljs-keyword">new</span> SharedArrayBuffer(<span class="hljs-number">1</span> * <span class="hljs-built_in">Int32Array</span>.BYTES_PER_ELEMENT);
+<span class="hljs-keyword">const</span> array = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Int32Array</span>(buffer);
+<span class="hljs-keyword">const</span> pool = Executors.newSingleThreadedExecutor();
+
+<span class="hljs-keyword">const</span> result = pool.submit(<span class="hljs-keyword">async</span> d =&gt; {
+  <span class="hljs-keyword">const</span> view = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Int32Array</span>(d);
+  Atomics.wait(view, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>); <span class="hljs-comment">// wait here until the value is no longer 0</span>
+  <span class="hljs-keyword">return</span> Atomics.load(view, <span class="hljs-number">0</span>);
+}, buffer);
+
+Atomics.store(array, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>); <span class="hljs-comment">// change the value from 0, unblocking the worker thread</span>
+
+<span class="hljs-built_in">console</span>.log(<span class="hljs-keyword">await</span> result); <span class="hljs-comment">// prints 1</span>
+</code></pre>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="../" class="navigation navigation-prev " aria-label="Previous page: Introduction">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="./#basic-usage" class="navigation navigation-next " aria-label="Next page: Basic">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"Examples","level":"1.2","depth":1,"next":{"title":"Basic","level":"1.2.1","depth":2,"anchor":"#basic-usage","path":"examples/README.md","ref":"examples/README.md#basic-usage","articles":[]},"previous":{"title":"Introduction","level":"1.1","depth":1,"path":"README.md","ref":"README.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"root":"./docs","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"gitbook":"3.2.2"},"file":{"path":"examples/README.md","mtime":"2018-06-27T03:10:02.301Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2018-06-27T03:11:30.888Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+
