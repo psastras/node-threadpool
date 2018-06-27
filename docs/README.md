@@ -45,3 +45,15 @@ const result2 = pool.submit(async () => "done 2");
 console.log(await result1); // joins and prints "done1"
 console.log(await result2); // joins and prints "done2"
 ```
+
+**Requires node 10.5+. You must run node with the `--experimental-worker` flag enabled.**
+
+```
+NODE_OPTIONS=--experimental-worker ./server.js
+```
+
+or
+
+```
+node --experimental-worker ./server.js
+```

@@ -56,7 +56,6 @@
     "gitbook-cli": "^2.3.2",
     "gitbook-plugin-anchors": "^0.7.1",
     "gitbook-plugin-collapsible-chapters": "^0.1.8",
-    "gitbook-plugin-copy-code-button": "0.0.2",
     "gitbook-plugin-edit-link": "^2.0.2",
     "gitbook-plugin-expandable-chapters": "^0.2.0",
     "gitbook-plugin-ga": "^1.0.1",
