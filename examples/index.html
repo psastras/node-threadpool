@@ -17,6 +17,14 @@
     
             
                 
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-collapsible-chapters/collapsible-chapters.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-anchors/plugin.css">
+                
+            
+                
                 <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
                 
             
@@ -49,6 +57,7 @@
         
     
     
+    
     <meta name="HandheldFriendly" content="true"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
@@ -62,6 +71,17 @@
     
     <link rel="prev" href="../" />
     
+
+    <style>
+    @media only screen and (max-width: 640px) {
+        .book-header .hidden-mobile {
+            display: none;
+        }
+    }
+    </style>
+    <script>
+        window["gitbook-plugin-github-buttons"] = {"buttons":[{"user":"psastras","repo":"node-threadpool","type":"star","size":"small","count":true}]};
+    </script>
 
     </head>
     <body>
@@ -244,8 +264,8 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="examples">Examples</h1>
-<h2 id="basic-usage">Basic Usage</h2>
+                                <h1 id="examples"><a name="examples" class="plugin-anchor" href="#examples"><i class="fa fa-link" aria-hidden="true"></i></a>Examples</h1>
+<h2 id="basic-usage"><a name="basic-usage" class="plugin-anchor" href="#basic-usage"><i class="fa fa-link" aria-hidden="true"></i></a>Basic Usage</h2>
 <p>To submit work to a thread pool, create a method which returns a promise.</p>
 <p>In this example, the method is declared inline and returns a <code>Promise&lt;string&gt;</code>.</p>
 <p>After completion of work, the thread pool resolves the promise with the value.</p>
@@ -254,7 +274,7 @@
 <span class="hljs-keyword">const</span> result = pool.submit(async () =&gt; <span class="hljs-string">&quot;hello world&quot;</span>);
 <span class="hljs-built_in">console</span>.log(await result); <span class="hljs-comment">// prints &quot;hello world&quot;</span>
 </code></pre>
-<h2 id="passing-data">Passing Data</h2>
+<h2 id="passing-data"><a name="passing-data" class="plugin-anchor" href="#passing-data"><i class="fa fa-link" aria-hidden="true"></i></a>Passing Data</h2>
 <p>Thread pool functions cannot access data outside of the function&apos;s context. This is because the worker runs in a separate thread and cannot access data in the main thread.</p>
 <p>The easiest way to get data into the worker thread is to copy it. This can be done by providing <code>submit</code> two arguments (the first is the runnable function, the second is the data to copy).</p>
 <p>Most standard data is supported. Class instances and data with circular references notably are not supported.</p>
@@ -269,7 +289,7 @@ map.set(<span class="hljs-string">&quot;key&quot;</span>, <span class="hljs-stri
 <span class="hljs-keyword">const</span> result = pool.submit(async d =&gt; d.map.get(<span class="hljs-string">&quot;key&quot;</span>), data);
 <span class="hljs-built_in">console</span>.log(await result); <span class="hljs-comment">// prints &quot;value&quot;</span>
 </code></pre>
-<h2 id="shared-array-buffers">Shared Array Buffers</h2>
+<h2 id="shared-array-buffers"><a name="shared-array-buffers" class="plugin-anchor" href="#shared-array-buffers"><i class="fa fa-link" aria-hidden="true"></i></a>Shared Array Buffers</h2>
 <p>Node&apos;s <code>worker_thread</code> API supports shared memory between threads. Unlike copying data directly to each worker, shared memory avoids the copy overhead and allows threads to communicate to each other by reading and writing to the same area of memory.</p>
 <p><code>node-threadpool</code> supports shared memory -- if you pass data of type
 <code>SharedArrayBuffer</code> in the <code>submit</code> function, it will automatically be accessible from each thread.</p>
@@ -290,7 +310,7 @@ map.set(<span class="hljs-string">&quot;key&quot;</span>, <span class="hljs-stri
 
 <span class="hljs-built_in">console</span>.log(<span class="hljs-keyword">await</span> result); <span class="hljs-comment">// prints 42</span>
 </code></pre>
-<h2 id="atomics">Atomics</h2>
+<h2 id="atomics"><a name="atomics" class="plugin-anchor" href="#atomics"><i class="fa fa-link" aria-hidden="true"></i></a>Atomics</h2>
 <p>For threads to access and write to the same elements in <code>SharedArrayBuffers</code>, Atomic operations are needed (ex. to implment locks and mutexes). In this example, the same area of memory is accessed in the main thread and the worker thread.</p>
 <p>The worker thread waits until the memory has been changed (by the main thread&apos;s <code>Atomics.store</code>), then continues with its operation.</p>
 <pre><code class="lang-javascript"><span class="hljs-keyword">const</span> buffer = <span class="hljs-keyword">new</span> SharedArrayBuffer(<span class="hljs-number">1</span> * <span class="hljs-built_in">Int32Array</span>.BYTES_PER_ELEMENT);
@@ -350,7 +370,7 @@ Atomics.store(array, <span class="hljs-number">0</span>, <span class="hljs-numbe
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Examples","level":"1.2","depth":1,"next":{"title":"Basic","level":"1.2.1","depth":2,"anchor":"#basic-usage","path":"examples/README.md","ref":"examples/README.md#basic-usage","articles":[]},"previous":{"title":"Introduction","level":"1.1","depth":1,"path":"README.md","ref":"README.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"root":"./docs","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"Paul Sastrasinh (psastras@gmail.com)","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"node-threadpool","gitbook":">=3.2.2","description":"A threadpool library for node using the worker_thread API"},"file":{"path":"examples/README.md","mtime":"2018-06-27T03:12:49.765Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-06-27T03:13:53.193Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Examples","level":"1.2","depth":1,"next":{"title":"Basic","level":"1.2.1","depth":2,"anchor":"#basic-usage","path":"examples/README.md","ref":"examples/README.md#basic-usage","articles":[]},"previous":{"title":"Introduction","level":"1.1","depth":1,"path":"README.md","ref":"README.md","articles":[]},"dir":"ltr"},"config":{"plugins":["collapsible-chapters","edit-link","github-buttons","anchors","sitemap-general","copy-code-button","ga"],"root":"./docs","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"search":{},"collapsible-chapters":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sitemap-general":{"prefix":"https://psastras.github.io/node-threadpool/"},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"github-buttons":{"buttons":[{"user":"psastras","repo":"node-threadpool","type":"star","size":"small","count":true}]},"copy-code-button":{},"ga":{"configuration":"auto","token":"UA-121473830-1"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"edit-link":{"label":"Edit This Page","base":"https://github.com/psastras/node-threadpool/blob/master"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"anchors":{}},"theme":"default","author":"Paul Sastrasinh (psastras@gmail.com)","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"node-threadpool","gitbook":">=3.2.2","description":"A threadpool library for node using the worker_thread API"},"file":{"path":"examples/README.md","mtime":"2018-06-27T03:45:41.879Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-06-27T03:47:31.103Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
@@ -358,6 +378,26 @@ Atomics.store(array, <span class="hljs-number">0</span>, <span class="hljs-numbe
         
     <script src="../gitbook/gitbook.js"></script>
     <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-collapsible-chapters/collapsible-chapters.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-edit-link/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-github-buttons/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-copy-code-button/toggle.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-ga/plugin.js"></script>
+        
     
         
         <script src="../gitbook/gitbook-plugin-search/search-engine.js"></script>
