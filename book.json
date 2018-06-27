@@ -1,4 +1,7 @@
 {
-  "gitbook": "3.2.2",
+  "title": "node-threadpool",
+  "description": "A threadpool library for node using the worker_thread API",
+  "author": "Paul Sastrasinh (psastras@gmail.com)",
+  "gitbook": ">=3.2.2",
   "root": "./docs"
 }
