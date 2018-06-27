@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>&quot;worker_threads&quot; | node-threadpool</title>
+	<title>Executors | node-threadpool</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -54,125 +54,117 @@
 					<a href="../globals.html">Globals</a>
 				</li>
 				<li>
-					<a href="workerthreads.html">WorkerThreads</a>
-				</li>
-				<li>
-					<a href="workerthreads._worker_threads_.html">&quot;worker_threads&quot;</a>
+					<a href="executors.html">Executors</a>
 				</li>
 			</ul>
-			<h1>Module &quot;worker_threads&quot;</h1>
+			<h1>External module Executors</h1>
 		</div>
 	</div>
 </header>
 <div class="container container-main">
 	<div class="row">
 		<div class="col-8 col-content">
-			<section class="tsd-panel tsd-comment">
-				<div class="tsd-comment tsd-typography">
-					<dl class="tsd-comment-tags">
-						<dt>module</dt>
-						<dd><p>WorkerThreads</p>
-						</dd>
-					</dl>
-				</div>
-			</section>
 			<section class="tsd-panel-group tsd-index-group">
 				<h2>Index</h2>
 				<section class="tsd-panel tsd-index-panel">
 					<div class="tsd-index-content">
 						<section class="tsd-index-section ">
-							<h3>Enumerations</h3>
+							<h3>Object literals</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-enum tsd-parent-kind-module"><a href="../enums/workerthreads._worker_threads_.messageportevent.html" class="tsd-kind-icon">Message<wbr>Port<wbr>Event</a></li>
-							</ul>
-						</section>
-						<section class="tsd-index-section ">
-							<h3>Classes</h3>
-							<ul class="tsd-index-list">
-								<li class="tsd-kind-class tsd-parent-kind-module"><a href="../classes/workerthreads._worker_threads_.messagechannel.html" class="tsd-kind-icon">Message<wbr>Channel</a></li>
-								<li class="tsd-kind-class tsd-parent-kind-module"><a href="../classes/workerthreads._worker_threads_.messageport.html" class="tsd-kind-icon">Message<wbr>Port</a></li>
-								<li class="tsd-kind-class tsd-parent-kind-module"><a href="../classes/workerthreads._worker_threads_.worker.html" class="tsd-kind-icon">Worker</a></li>
-							</ul>
-						</section>
-						<section class="tsd-index-section ">
-							<h3>Interfaces</h3>
-							<ul class="tsd-index-list">
-								<li class="tsd-kind-interface tsd-parent-kind-module"><a href="../interfaces/workerthreads._worker_threads_.workeroptions.html" class="tsd-kind-icon">Worker<wbr>Options</a></li>
-							</ul>
-						</section>
-						<section class="tsd-index-section ">
-							<h3>Variables</h3>
-							<ul class="tsd-index-list">
-								<li class="tsd-kind-variable tsd-parent-kind-module"><a href="workerthreads._worker_threads_.html#ismainthread" class="tsd-kind-icon">is<wbr>Main<wbr>Thread</a></li>
-								<li class="tsd-kind-variable tsd-parent-kind-module"><a href="workerthreads._worker_threads_.html#parentport" class="tsd-kind-icon">parent<wbr>Port</a></li>
-								<li class="tsd-kind-variable tsd-parent-kind-module"><a href="workerthreads._worker_threads_.html#threadid" class="tsd-kind-icon">thread<wbr>Id</a></li>
-								<li class="tsd-kind-variable tsd-parent-kind-module"><a href="workerthreads._worker_threads_.html#workerdata" class="tsd-kind-icon">worker<wbr>Data</a></li>
+								<li class="tsd-kind-object-literal tsd-parent-kind-external-module"><a href="executors.html#executors-1" class="tsd-kind-icon">Executors</a></li>
 							</ul>
 						</section>
 					</div>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
-				<h2>Variables</h2>
-				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-module">
-					<a name="ismainthread" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagConst">Const</span> is<wbr>Main<wbr>Thread</h3>
-					<div class="tsd-signature tsd-kind-icon">is<wbr>Main<wbr>Thread<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+				<h2>Object literals</h2>
+				<section class="tsd-panel tsd-member tsd-kind-object-literal tsd-parent-kind-external-module">
+					<a name="executors-1" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> Executors</h3>
+					<div class="tsd-signature tsd-kind-icon">Executors<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/psastras/node-threadpool/blob/6dc408b/lib/worker_threads.d.ts#L108">worker_threads.d.ts:108</a></li>
+							<li>Defined in <a href="https://github.com/psastras/node-threadpool/blob/1c834b3/lib/index.ts#L26">index.ts:26</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
-							<p>Is true if this code is not running inside of a Worker thread.</p>
+							<p>Utility methods for creating different types of thread pools.</p>
 						</div>
+						<p>Example usage:</p>
+						<pre><code class="lang-javascript"><span class="hljs-keyword">import</span> { Executors } <span class="hljs-keyword">from</span> <span class="hljs-string">"node-threadpool"</span>;
+<span class="hljs-keyword">const</span> pool = Executors.newFixedThreadPool(<span class="hljs-number">4</span>);
+
+<span class="hljs-comment">// these execute in parallel (as long as the pool size &gt;= 2)</span>
+<span class="hljs-keyword">const</span> result1 = pool.submit(<span class="hljs-keyword">async</span> () =&gt; <span class="hljs-string">"done 1"</span>);
+<span class="hljs-keyword">const</span> result2 = pool.submit(<span class="hljs-keyword">async</span> () =&gt; <span class="hljs-string">"done 2"</span>);
+
+<span class="hljs-built_in">console</span>.log(<span class="hljs-keyword">await</span> result1); <span class="hljs-comment">// joins and prints "done1"</span>
+<span class="hljs-built_in">console</span>.log(<span class="hljs-keyword">await</span> result2); <span class="hljs-comment">// joins and prints "done2"</span>
+</code></pre>
 					</div>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-module">
-					<a name="parentport" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagConst">Const</span> parent<wbr>Port</h3>
-					<div class="tsd-signature tsd-kind-icon">parent<wbr>Port<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><a href="../classes/workerthreads._worker_threads_.messageport.html" class="tsd-signature-type">MessagePort</a></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/psastras/node-threadpool/blob/6dc408b/lib/worker_threads.d.ts#L103">worker_threads.d.ts:103</a></li>
+					<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-object-literal">
+						<a name="executors-1.newfixedthreadpool" class="tsd-anchor"></a>
+						<h3>new<wbr>Fixed<wbr>Thread<wbr>Pool</h3>
+						<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-object-literal">
+							<li class="tsd-signature tsd-kind-icon">new<wbr>Fixed<wbr>Thread<wbr>Pool<span class="tsd-signature-symbol">(</span>numThreads<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../interfaces/threadpool.threadpool-1.ithreadpool.html" class="tsd-signature-type">IThreadPool</a></li>
 						</ul>
-					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>If this thread was spawned as a Worker, this will be a MessagePort allowing communication with the parent thread. Messages sent using parentPort.postMessage() will be available in the parent thread using worker.on(&#39;message&#39;), and messages sent from the parent thread using worker.postMessage() will be available in this thread using parentPort.on(&#39;message&#39;).</p>
-						</div>
-					</div>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-module">
-					<a name="threadid" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagConst">Const</span> thread<wbr>Id</h3>
-					<div class="tsd-signature tsd-kind-icon">thread<wbr>Id<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/psastras/node-threadpool/blob/6dc408b/lib/worker_threads.d.ts#L118">worker_threads.d.ts:118</a></li>
+						<ul class="tsd-descriptions">
+							<li class="tsd-description">
+								<aside class="tsd-sources">
+									<ul>
+										<li>Defined in <a href="https://github.com/psastras/node-threadpool/blob/1c834b3/lib/index.ts#L41">index.ts:41</a></li>
+									</ul>
+								</aside>
+								<div class="tsd-comment tsd-typography">
+									<div class="lead">
+										<p>Constructs a new fixed thread pool with the given number of threads.</p>
+									</div>
+									<p>A fixed thread pool immediately creates its worker threads and maintains
+										that set amount of threads.  If a thread is terminated, threads will be recreated
+									to maintain a fixed size.</p>
+									<p>Work submitted to this thread pool will be handed to a thread if available. If all
+										threads are busy, the work will be queued and executed in queue order as threads
+									free up.</p>
+								</div>
+								<h4 class="tsd-parameters-title">Parameters</h4>
+								<ul class="tsd-parameters">
+									<li>
+										<h5>numThreads: <span class="tsd-signature-type">number</span></h5>
+									</li>
+								</ul>
+								<h4 class="tsd-returns-title">Returns <a href="../interfaces/threadpool.threadpool-1.ithreadpool.html" class="tsd-signature-type">IThreadPool</a></h4>
+								<p>A instance of <a href="../interfaces/threadpool.threadpool-1.ithreadpool.html">IThreadPool</a></p>
+							</li>
 						</ul>
-					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>An integer identifier for the current thread. On the corresponding worker object (if there is any), it is available as worker.threadId.</p>
-						</div>
-					</div>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-module">
-					<a name="workerdata" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagConst">Const</span> worker<wbr>Data</h3>
-					<div class="tsd-signature tsd-kind-icon">worker<wbr>Data<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/psastras/node-threadpool/blob/6dc408b/lib/worker_threads.d.ts#L113">worker_threads.d.ts:113</a></li>
+					</section>
+					<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-object-literal">
+						<a name="executors-1.newsinglethreadedexecutor" class="tsd-anchor"></a>
+						<h3>new<wbr>Single<wbr>Threaded<wbr>Executor</h3>
+						<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-object-literal">
+							<li class="tsd-signature tsd-kind-icon">new<wbr>Single<wbr>Threaded<wbr>Executor<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../interfaces/threadpool.threadpool-1.ithreadpool.html" class="tsd-signature-type">IThreadPool</a></li>
 						</ul>
-					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>An arbitrary JavaScript value that contains a clone of the data passed to this thread’s Worker constructor.</p>
-						</div>
-					</div>
+						<ul class="tsd-descriptions">
+							<li class="tsd-description">
+								<aside class="tsd-sources">
+									<ul>
+										<li>Defined in <a href="https://github.com/psastras/node-threadpool/blob/1c834b3/lib/index.ts#L53">index.ts:53</a></li>
+									</ul>
+								</aside>
+								<div class="tsd-comment tsd-typography">
+									<div class="lead">
+										<p>Constructs a new  thread pool with a single worker thread.</p>
+									</div>
+									<p>Work submitted to this thread pool will be handed to the thread if available. If
+										the thread is busy, the work will be queued and executed in queue order once the thread
+									frees up.</p>
+								</div>
+								<h4 class="tsd-returns-title">Returns <a href="../interfaces/threadpool.threadpool-1.ithreadpool.html" class="tsd-signature-type">IThreadPool</a></h4>
+								<p>A instance of <a href="../interfaces/threadpool.threadpool-1.ithreadpool.html">IThreadPool</a></p>
+							</li>
+						</ul>
+					</section>
 				</section>
 			</section>
 		</div>
@@ -182,36 +174,24 @@
 					<li class="globals  ">
 						<a href="../globals.html"><em>Globals</em></a>
 					</li>
+					<li class="current tsd-kind-external-module">
+						<a href="executors.html">Executors</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="fixedthreadpool.html">Fixed<wbr>Thread<wbr>Pool</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="threadpool.html">Thread<wbr>Pool</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="workerthreads.html">Worker<wbr>Threads</a>
+					</li>
 				</ul>
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
-					<li class=" tsd-kind-enum tsd-parent-kind-module">
-						<a href="../enums/workerthreads._worker_threads_.messageportevent.html" class="tsd-kind-icon">Message<wbr>Port<wbr>Event</a>
-					</li>
-					<li class=" tsd-kind-class tsd-parent-kind-module">
-						<a href="../classes/workerthreads._worker_threads_.messagechannel.html" class="tsd-kind-icon">Message<wbr>Channel</a>
-					</li>
-					<li class=" tsd-kind-class tsd-parent-kind-module">
-						<a href="../classes/workerthreads._worker_threads_.messageport.html" class="tsd-kind-icon">Message<wbr>Port</a>
-					</li>
-					<li class=" tsd-kind-class tsd-parent-kind-module">
-						<a href="../classes/workerthreads._worker_threads_.worker.html" class="tsd-kind-icon">Worker</a>
-					</li>
-					<li class=" tsd-kind-interface tsd-parent-kind-module">
-						<a href="../interfaces/workerthreads._worker_threads_.workeroptions.html" class="tsd-kind-icon">Worker<wbr>Options</a>
-					</li>
-					<li class=" tsd-kind-variable tsd-parent-kind-module">
-						<a href="workerthreads._worker_threads_.html#ismainthread" class="tsd-kind-icon">is<wbr>Main<wbr>Thread</a>
-					</li>
-					<li class=" tsd-kind-variable tsd-parent-kind-module">
-						<a href="workerthreads._worker_threads_.html#parentport" class="tsd-kind-icon">parent<wbr>Port</a>
-					</li>
-					<li class=" tsd-kind-variable tsd-parent-kind-module">
-						<a href="workerthreads._worker_threads_.html#threadid" class="tsd-kind-icon">thread<wbr>Id</a>
-					</li>
-					<li class=" tsd-kind-variable tsd-parent-kind-module">
-						<a href="workerthreads._worker_threads_.html#workerdata" class="tsd-kind-icon">worker<wbr>Data</a>
+					<li class=" tsd-kind-object-literal tsd-parent-kind-external-module">
+						<a href="executors.html#executors-1" class="tsd-kind-icon">Executors</a>
 					</li>
 				</ul>
 			</nav>

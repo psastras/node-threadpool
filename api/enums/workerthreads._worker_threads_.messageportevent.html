@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>FixedThreadPool | node-threadpool</title>
+	<title>MessagePortEvent | node-threadpool</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -54,44 +54,62 @@
 					<a href="../globals.html">Globals</a>
 				</li>
 				<li>
-					<a href="fixedthreadpool.html">FixedThreadPool</a>
+					<a href="../modules/workerthreads.html">WorkerThreads</a>
+				</li>
+				<li>
+					<a href="../modules/workerthreads._worker_threads_.html">&quot;worker_threads&quot;</a>
+				</li>
+				<li>
+					<a href="workerthreads._worker_threads_.messageportevent.html">MessagePortEvent</a>
 				</li>
 			</ul>
-			<h1>External module FixedThreadPool</h1>
+			<h1>Enumeration MessagePortEvent</h1>
 		</div>
 	</div>
 </header>
 <div class="container container-main">
 	<div class="row">
 		<div class="col-8 col-content">
+			<section class="tsd-panel tsd-comment">
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>Types of events sent to a MessagePort</p>
+					</div>
+				</div>
+			</section>
 			<section class="tsd-panel-group tsd-index-group">
 				<h2>Index</h2>
 				<section class="tsd-panel tsd-index-panel">
 					<div class="tsd-index-content">
 						<section class="tsd-index-section ">
-							<h3>Classes</h3>
+							<h3>Enumeration members</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-class tsd-parent-kind-external-module"><a href="../classes/fixedthreadpool.fixedthreadpool-1.html" class="tsd-kind-icon">Fixed<wbr>Thread<wbr>Pool</a></li>
-							</ul>
-						</section>
-						<section class="tsd-index-section tsd-is-not-exported">
-							<h3>Variables</h3>
-							<ul class="tsd-index-list">
-								<li class="tsd-kind-variable tsd-parent-kind-external-module tsd-is-not-exported"><a href="fixedthreadpool.html#workerthread" class="tsd-kind-icon">worker<wbr>Thread</a></li>
+								<li class="tsd-kind-enum-member tsd-parent-kind-enum"><a href="workerthreads._worker_threads_.messageportevent.html#close" class="tsd-kind-icon">Close</a></li>
+								<li class="tsd-kind-enum-member tsd-parent-kind-enum"><a href="workerthreads._worker_threads_.messageportevent.html#message" class="tsd-kind-icon">Message</a></li>
 							</ul>
 						</section>
 					</div>
 				</section>
 			</section>
-			<section class="tsd-panel-group tsd-member-group tsd-is-not-exported">
-				<h2>Variables</h2>
-				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-external-module tsd-is-not-exported">
-					<a name="workerthread" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagConst">Const</span> worker<wbr>Thread</h3>
-					<div class="tsd-signature tsd-kind-icon">worker<wbr>Thread<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">"const { parentPort } &#x3D; require(&#x27;worker_threads&#x27;);const { serialize, deserialize } &#x3D; require(&#x27;surrial&#x27;);parentPort.on(&#x27;message&#x27;, ({ value, port, runnable, data, rawData }) &#x3D;&gt; {if (value &#x3D;&#x3D;&#x3D; &quot;__run__&quot;) {try {const hydratedData &#x3D; data &amp;&amp; (data instanceof SharedArrayBuffer ? data : Object.assign(deserialize(data), rawData));deserialize(runnable)(hydratedData).then((result) &#x3D;&gt; {port.postMessage({ value: &quot;__result__&quot;, result: serialize(result) });})} catch (e) {port.postMessage({ value: &quot;__error__&quot;, result: serialize(e), msg: e.message });}}});"</span><span class="tsd-signature-symbol"> =&nbsp;&#x60;const { parentPort } &#x3D; require(&#x27;worker_threads&#x27;);const { serialize, deserialize } &#x3D; require(&#x27;surrial&#x27;);parentPort.on(&#x27;message&#x27;, ({ value, port, runnable, data, rawData }) &#x3D;&gt; {if (value &#x3D;&#x3D;&#x3D; &quot;__run__&quot;) {try {const hydratedData &#x3D; data &amp;&amp; (data instanceof SharedArrayBuffer ? data : Object.assign(deserialize(data), rawData));deserialize(runnable)(hydratedData).then((result) &#x3D;&gt; {port.postMessage({ value: &quot;__result__&quot;, result: serialize(result) });})} catch (e) {port.postMessage({ value: &quot;__error__&quot;, result: serialize(e), msg: e.message });}}});&#x60;</span></div>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Enumeration members</h2>
+				<section class="tsd-panel tsd-member tsd-kind-enum-member tsd-parent-kind-enum">
+					<a name="close" class="tsd-anchor"></a>
+					<h3>Close</h3>
+					<div class="tsd-signature tsd-kind-icon">Close<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol"> =&nbsp;&quot;close&quot;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/psastras/node-threadpool/blob/6dc408b/lib/fixed-thread-pool.ts#L16">fixed-thread-pool.ts:16</a></li>
+							<li>Defined in <a href="https://github.com/psastras/node-threadpool/blob/1c834b3/lib/worker_threads.d.ts#L18">worker_threads.d.ts:18</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-enum-member tsd-parent-kind-enum">
+					<a name="message" class="tsd-anchor"></a>
+					<h3>Message</h3>
+					<div class="tsd-signature tsd-kind-icon">Message<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol"> =&nbsp;&quot;message&quot;</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/psastras/node-threadpool/blob/1c834b3/lib/worker_threads.d.ts#L22">worker_threads.d.ts:22</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -103,27 +121,48 @@
 					<li class="globals  ">
 						<a href="../globals.html"><em>Globals</em></a>
 					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="executors.html">Executors</a>
-					</li>
-					<li class="current tsd-kind-external-module">
-						<a href="fixedthreadpool.html">Fixed<wbr>Thread<wbr>Pool</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="threadpool.html">Thread<wbr>Pool</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="workerthreads.html">Worker<wbr>Threads</a>
-					</li>
 				</ul>
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
-					<li class=" tsd-kind-class tsd-parent-kind-external-module">
-						<a href="../classes/fixedthreadpool.fixedthreadpool-1.html" class="tsd-kind-icon">Fixed<wbr>Thread<wbr>Pool</a>
+				</ul>
+				<ul class="current">
+					<li class="current tsd-kind-enum tsd-parent-kind-module">
+						<a href="workerthreads._worker_threads_.messageportevent.html" class="tsd-kind-icon">Message<wbr>Port<wbr>Event</a>
+						<ul>
+							<li class=" tsd-kind-enum-member tsd-parent-kind-enum">
+								<a href="workerthreads._worker_threads_.messageportevent.html#close" class="tsd-kind-icon">Close</a>
+							</li>
+							<li class=" tsd-kind-enum-member tsd-parent-kind-enum">
+								<a href="workerthreads._worker_threads_.messageportevent.html#message" class="tsd-kind-icon">Message</a>
+							</li>
+						</ul>
 					</li>
-					<li class=" tsd-kind-variable tsd-parent-kind-external-module tsd-is-not-exported">
-						<a href="fixedthreadpool.html#workerthread" class="tsd-kind-icon">worker<wbr>Thread</a>
+				</ul>
+				<ul class="after-current">
+					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="../classes/workerthreads._worker_threads_.messagechannel.html" class="tsd-kind-icon">Message<wbr>Channel</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="../classes/workerthreads._worker_threads_.messageport.html" class="tsd-kind-icon">Message<wbr>Port</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="../classes/workerthreads._worker_threads_.worker.html" class="tsd-kind-icon">Worker</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-parent-kind-module">
+						<a href="../interfaces/workerthreads._worker_threads_.workeroptions.html" class="tsd-kind-icon">Worker<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-variable tsd-parent-kind-module">
+						<a href="../modules/workerthreads._worker_threads_.html#ismainthread" class="tsd-kind-icon">is<wbr>Main<wbr>Thread</a>
+					</li>
+					<li class=" tsd-kind-variable tsd-parent-kind-module">
+						<a href="../modules/workerthreads._worker_threads_.html#parentport" class="tsd-kind-icon">parent<wbr>Port</a>
+					</li>
+					<li class=" tsd-kind-variable tsd-parent-kind-module">
+						<a href="../modules/workerthreads._worker_threads_.html#threadid" class="tsd-kind-icon">thread<wbr>Id</a>
+					</li>
+					<li class=" tsd-kind-variable tsd-parent-kind-module">
+						<a href="../modules/workerthreads._worker_threads_.html#workerdata" class="tsd-kind-icon">worker<wbr>Data</a>
 					</li>
 				</ul>
 			</nav>

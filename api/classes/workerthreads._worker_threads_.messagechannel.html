@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>MessagePortEvent | node-threadpool</title>
+	<title>MessageChannel | node-threadpool</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -60,10 +60,10 @@
 					<a href="../modules/workerthreads._worker_threads_.html">&quot;worker_threads&quot;</a>
 				</li>
 				<li>
-					<a href="workerthreads._worker_threads_.messageportevent.html">MessagePortEvent</a>
+					<a href="workerthreads._worker_threads_.messagechannel.html">MessageChannel</a>
 				</li>
 			</ul>
-			<h1>Enumeration MessagePortEvent</h1>
+			<h1>Class MessageChannel</h1>
 		</div>
 	</div>
 </header>
@@ -73,43 +73,51 @@
 			<section class="tsd-panel tsd-comment">
 				<div class="tsd-comment tsd-typography">
 					<div class="lead">
-						<p>Types of events sent to a MessagePort</p>
+						<p>Instances of the worker.MessageChannel class represent an asynchronous, two-way communications channel. The MessageChannel has no methods of its own. new MessageChannel() yields an object with port1 and port2 properties, which refer to linked MessagePort instances.</p>
 					</div>
 				</div>
+			</section>
+			<section class="tsd-panel tsd-hierarchy">
+				<h3>Hierarchy</h3>
+				<ul class="tsd-hierarchy">
+					<li>
+						<span class="target">MessageChannel</span>
+					</li>
+				</ul>
 			</section>
 			<section class="tsd-panel-group tsd-index-group">
 				<h2>Index</h2>
 				<section class="tsd-panel tsd-index-panel">
 					<div class="tsd-index-content">
 						<section class="tsd-index-section ">
-							<h3>Enumeration members</h3>
+							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-enum-member tsd-parent-kind-enum"><a href="workerthreads._worker_threads_.messageportevent.html#close" class="tsd-kind-icon">Close</a></li>
-								<li class="tsd-kind-enum-member tsd-parent-kind-enum"><a href="workerthreads._worker_threads_.messageportevent.html#message" class="tsd-kind-icon">Message</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="workerthreads._worker_threads_.messagechannel.html#port1" class="tsd-kind-icon">port1</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="workerthreads._worker_threads_.messagechannel.html#port2" class="tsd-kind-icon">port2</a></li>
 							</ul>
 						</section>
 					</div>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
-				<h2>Enumeration members</h2>
-				<section class="tsd-panel tsd-member tsd-kind-enum-member tsd-parent-kind-enum">
-					<a name="close" class="tsd-anchor"></a>
-					<h3>Close</h3>
-					<div class="tsd-signature tsd-kind-icon">Close<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol"> =&nbsp;&quot;close&quot;</span></div>
+				<h2>Properties</h2>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="port1" class="tsd-anchor"></a>
+					<h3>port1</h3>
+					<div class="tsd-signature tsd-kind-icon">port1<span class="tsd-signature-symbol">:</span> <a href="workerthreads._worker_threads_.messageport.html" class="tsd-signature-type">MessagePort</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/psastras/node-threadpool/blob/6dc408b/lib/worker_threads.d.ts#L18">worker_threads.d.ts:18</a></li>
+							<li>Defined in <a href="https://github.com/psastras/node-threadpool/blob/1c834b3/lib/worker_threads.d.ts#L9">worker_threads.d.ts:9</a></li>
 						</ul>
 					</aside>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-enum-member tsd-parent-kind-enum">
-					<a name="message" class="tsd-anchor"></a>
-					<h3>Message</h3>
-					<div class="tsd-signature tsd-kind-icon">Message<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol"> =&nbsp;&quot;message&quot;</span></div>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="port2" class="tsd-anchor"></a>
+					<h3>port2</h3>
+					<div class="tsd-signature tsd-kind-icon">port2<span class="tsd-signature-symbol">:</span> <a href="workerthreads._worker_threads_.messageport.html" class="tsd-signature-type">MessagePort</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/psastras/node-threadpool/blob/6dc408b/lib/worker_threads.d.ts#L22">worker_threads.d.ts:22</a></li>
+							<li>Defined in <a href="https://github.com/psastras/node-threadpool/blob/1c834b3/lib/worker_threads.d.ts#L10">worker_threads.d.ts:10</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -125,29 +133,29 @@
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
+					<li class=" tsd-kind-enum tsd-parent-kind-module">
+						<a href="../enums/workerthreads._worker_threads_.messageportevent.html" class="tsd-kind-icon">Message<wbr>Port<wbr>Event</a>
+					</li>
 				</ul>
 				<ul class="current">
-					<li class="current tsd-kind-enum tsd-parent-kind-module">
-						<a href="workerthreads._worker_threads_.messageportevent.html" class="tsd-kind-icon">Message<wbr>Port<wbr>Event</a>
+					<li class="current tsd-kind-class tsd-parent-kind-module">
+						<a href="workerthreads._worker_threads_.messagechannel.html" class="tsd-kind-icon">Message<wbr>Channel</a>
 						<ul>
-							<li class=" tsd-kind-enum-member tsd-parent-kind-enum">
-								<a href="workerthreads._worker_threads_.messageportevent.html#close" class="tsd-kind-icon">Close</a>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="workerthreads._worker_threads_.messagechannel.html#port1" class="tsd-kind-icon">port1</a>
 							</li>
-							<li class=" tsd-kind-enum-member tsd-parent-kind-enum">
-								<a href="workerthreads._worker_threads_.messageportevent.html#message" class="tsd-kind-icon">Message</a>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="workerthreads._worker_threads_.messagechannel.html#port2" class="tsd-kind-icon">port2</a>
 							</li>
 						</ul>
 					</li>
 				</ul>
 				<ul class="after-current">
 					<li class=" tsd-kind-class tsd-parent-kind-module">
-						<a href="../classes/workerthreads._worker_threads_.messagechannel.html" class="tsd-kind-icon">Message<wbr>Channel</a>
+						<a href="workerthreads._worker_threads_.messageport.html" class="tsd-kind-icon">Message<wbr>Port</a>
 					</li>
 					<li class=" tsd-kind-class tsd-parent-kind-module">
-						<a href="../classes/workerthreads._worker_threads_.messageport.html" class="tsd-kind-icon">Message<wbr>Port</a>
-					</li>
-					<li class=" tsd-kind-class tsd-parent-kind-module">
-						<a href="../classes/workerthreads._worker_threads_.worker.html" class="tsd-kind-icon">Worker</a>
+						<a href="workerthreads._worker_threads_.worker.html" class="tsd-kind-icon">Worker</a>
 					</li>
 					<li class=" tsd-kind-interface tsd-parent-kind-module">
 						<a href="../interfaces/workerthreads._worker_threads_.workeroptions.html" class="tsd-kind-icon">Worker<wbr>Options</a>
