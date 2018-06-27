@@ -126,13 +126,13 @@
 					<a name="constructor" class="tsd-anchor"></a>
 					<h3>constructor</h3>
 					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">new <wbr>Fixed<wbr>Thread<wbr>Pool<span class="tsd-signature-symbol">(</span>numThreads<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, workerOptions<span class="tsd-signature-symbol">?: </span><a href="../interfaces/workerthreads._worker_threads_.workeroptions.html" class="tsd-signature-type">WorkerOptions</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="fixedthreadpool.fixedthreadpool-1.html" class="tsd-signature-type">FixedThreadPool</a></li>
+						<li class="tsd-signature tsd-kind-icon">new <wbr>Fixed<wbr>Thread<wbr>Pool<span class="tsd-signature-symbol">(</span>numThreads<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, workerOptions<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">WorkerOptions</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="fixedthreadpool.fixedthreadpool-1.html" class="tsd-signature-type">FixedThreadPool</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/psastras/node-threadpool/blob/3071090/lib/fixed-thread-pool.ts#L46">fixed-thread-pool.ts:46</a></li>
+									<li>Defined in <a href="https://github.com/psastras/node-threadpool/blob/73ed618/lib/thread-pool/fixed-thread-pool.ts#L30">thread-pool/fixed-thread-pool.ts:30</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -141,7 +141,7 @@
 									<h5>numThreads: <span class="tsd-signature-type">number</span></h5>
 								</li>
 								<li>
-									<h5><span class="tsd-flag ts-flagDefault value">Default value</span> workerOptions: <a href="../interfaces/workerthreads._worker_threads_.workeroptions.html" class="tsd-signature-type">WorkerOptions</a><span class="tsd-signature-symbol"> =&nbsp;{}</span></h5>
+									<h5><span class="tsd-flag ts-flagDefault value">Default value</span> workerOptions: <span class="tsd-signature-type">WorkerOptions</span><span class="tsd-signature-symbol"> =&nbsp;{}</span></h5>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <a href="fixedthreadpool.fixedthreadpool-1.html" class="tsd-signature-type">FixedThreadPool</a></h4>
@@ -154,10 +154,10 @@
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
 					<a name="freeworkers" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagPrivate">Private</span> free<wbr>Workers</h3>
-					<div class="tsd-signature tsd-kind-icon">free<wbr>Workers<span class="tsd-signature-symbol">:</span> <a href="workerthreads._worker_threads_.worker.html" class="tsd-signature-type">Worker</a><span class="tsd-signature-symbol">[]</span></div>
+					<div class="tsd-signature tsd-kind-icon">free<wbr>Workers<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Worker</span><span class="tsd-signature-symbol">[]</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/psastras/node-threadpool/blob/3071090/lib/fixed-thread-pool.ts#L37">fixed-thread-pool.ts:37</a></li>
+							<li>Defined in <a href="https://github.com/psastras/node-threadpool/blob/73ed618/lib/thread-pool/fixed-thread-pool.ts#L21">thread-pool/fixed-thread-pool.ts:21</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -167,7 +167,7 @@
 					<div class="tsd-signature tsd-kind-icon">num<wbr>Threads<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/psastras/node-threadpool/blob/3071090/lib/fixed-thread-pool.ts#L49">fixed-thread-pool.ts:49</a></li>
+							<li>Defined in <a href="https://github.com/psastras/node-threadpool/blob/73ed618/lib/thread-pool/fixed-thread-pool.ts#L33">thread-pool/fixed-thread-pool.ts:33</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -177,17 +177,17 @@
 					<div class="tsd-signature tsd-kind-icon">queue<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Array</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-symbol">[</span><span class="tsd-signature-type">function</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">function</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">function</span><span class="tsd-signature-symbol">]</span><span class="tsd-signature-symbol">&gt;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/psastras/node-threadpool/blob/3071090/lib/fixed-thread-pool.ts#L39">fixed-thread-pool.ts:39</a></li>
+							<li>Defined in <a href="https://github.com/psastras/node-threadpool/blob/73ed618/lib/thread-pool/fixed-thread-pool.ts#L23">thread-pool/fixed-thread-pool.ts:23</a></li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
 					<a name="workeroptions" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagPrivate">Private</span> worker<wbr>Options</h3>
-					<div class="tsd-signature tsd-kind-icon">worker<wbr>Options<span class="tsd-signature-symbol">:</span> <a href="../interfaces/workerthreads._worker_threads_.workeroptions.html" class="tsd-signature-type">WorkerOptions</a></div>
+					<div class="tsd-signature tsd-kind-icon">worker<wbr>Options<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">WorkerOptions</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/psastras/node-threadpool/blob/3071090/lib/fixed-thread-pool.ts#L50">fixed-thread-pool.ts:50</a></li>
+							<li>Defined in <a href="https://github.com/psastras/node-threadpool/blob/73ed618/lib/thread-pool/fixed-thread-pool.ts#L34">thread-pool/fixed-thread-pool.ts:34</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -198,19 +198,19 @@
 					<a name="createworker" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagPrivate">Private</span> create<wbr>Worker</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-private">
-						<li class="tsd-signature tsd-kind-icon">create<wbr>Worker<span class="tsd-signature-symbol">(</span>workerOptions<span class="tsd-signature-symbol">: </span><a href="../interfaces/workerthreads._worker_threads_.workeroptions.html" class="tsd-signature-type">WorkerOptions</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></li>
+						<li class="tsd-signature tsd-kind-icon">create<wbr>Worker<span class="tsd-signature-symbol">(</span>workerOptions<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">WorkerOptions</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/psastras/node-threadpool/blob/3071090/lib/fixed-thread-pool.ts#L76">fixed-thread-pool.ts:76</a></li>
+									<li>Defined in <a href="https://github.com/psastras/node-threadpool/blob/73ed618/lib/thread-pool/fixed-thread-pool.ts#L60">thread-pool/fixed-thread-pool.ts:60</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>workerOptions: <a href="../interfaces/workerthreads._worker_threads_.workeroptions.html" class="tsd-signature-type">WorkerOptions</a></h5>
+									<h5>workerOptions: <span class="tsd-signature-type">WorkerOptions</span></h5>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">any</span></h4>
@@ -227,7 +227,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/psastras/node-threadpool/blob/3071090/lib/fixed-thread-pool.ts#L83">fixed-thread-pool.ts:83</a></li>
+									<li>Defined in <a href="https://github.com/psastras/node-threadpool/blob/73ed618/lib/thread-pool/fixed-thread-pool.ts#L67">thread-pool/fixed-thread-pool.ts:67</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-type-parameters-title">Type parameters</h4>
@@ -322,7 +322,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/psastras/node-threadpool/blob/3071090/lib/fixed-thread-pool.ts#L93">fixed-thread-pool.ts:93</a></li>
+									<li>Defined in <a href="https://github.com/psastras/node-threadpool/blob/73ed618/lib/thread-pool/fixed-thread-pool.ts#L77">thread-pool/fixed-thread-pool.ts:77</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">any</span></h4>
@@ -339,7 +339,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/psastras/node-threadpool/blob/3071090/lib/fixed-thread-pool.ts#L58">fixed-thread-pool.ts:58</a></li>
+									<li>Defined in <a href="https://github.com/psastras/node-threadpool/blob/73ed618/lib/thread-pool/fixed-thread-pool.ts#L42">thread-pool/fixed-thread-pool.ts:42</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-type-parameters-title">Type parameters</h4>
@@ -391,6 +391,9 @@
 						<a href="../globals.html"><em>Globals</em></a>
 					</li>
 					<li class=" tsd-kind-external-module">
+						<a href="../modules/_thread_pool_thread_worker_.html">"thread-<wbr>pool/thread-<wbr>worker"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
 						<a href="../modules/executors.html">Executors</a>
 					</li>
 					<li class="current tsd-kind-external-module">
@@ -398,9 +401,6 @@
 					</li>
 					<li class=" tsd-kind-external-module">
 						<a href="../modules/threadpool.html">Thread<wbr>Pool</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="../modules/workerthreads.html">Worker<wbr>Threads</a>
 					</li>
 				</ul>
 			</nav>
@@ -442,9 +442,6 @@
 					</li>
 				</ul>
 				<ul class="after-current">
-					<li class=" tsd-kind-variable tsd-parent-kind-external-module tsd-is-not-exported">
-						<a href="../modules/fixedthreadpool.html#workerthread" class="tsd-kind-icon">worker<wbr>Thread</a>
-					</li>
 				</ul>
 			</nav>
 		</div>
