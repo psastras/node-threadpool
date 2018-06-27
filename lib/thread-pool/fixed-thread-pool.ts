@@ -12,23 +12,7 @@ import {
   WorkerOptions
 } from "worker_threads";
 import { ThreadPool } from "./thread-pool";
-
-const workerThread = `
-const { parentPort } = require('worker_threads');
-const { serialize, deserialize } = require('surrial');
-parentPort.on('message', ({ action, payload: { port, runnable, data, rawData } }) => {
-  if (action === "__run__") {
-    try {
-      const hydratedData = data && (data instanceof SharedArrayBuffer ? data : Object.assign(deserialize(data), rawData));
-      deserialize(runnable)(hydratedData).then((result) => {
-        port.postMessage({ action: "__result__", payload: { result: serialize(result) } });
-      })
-    } catch (e) {
-      port.postMessage({ action: "__error__", payload: { result: serialize(e), msg: e.message, error: true } });
-    }
-  }
-});
-`;
+import { ThreadWorker } from "./thread-worker";
 
 /**
  * @internal
@@ -74,7 +58,7 @@ export class FixedThreadPool implements ThreadPool.IThreadPool {
   };
 
   private createWorker = (workerOptions: WorkerOptions): any => {
-    return new Worker(workerThread, {
+    return new Worker(ThreadWorker.code, {
       ...workerOptions,
       eval: true
     });
@@ -107,18 +91,15 @@ export class FixedThreadPool implements ThreadPool.IThreadPool {
       }
 
       worker.postMessage(
-        {
-          action: "__run__",
-          payload: {
-            data:
-              data instanceof SharedArrayBuffer || !data
-                ? data
-                : serialize(data) || {},
-            port: subChannel.port1,
-            rawData,
-            runnable: serialize(runnable)
-          }
-        },
+        ThreadWorker.createRunAction({
+          data:
+            data instanceof SharedArrayBuffer || !data
+              ? data
+              : serialize(data) || {},
+          port: subChannel.port1,
+          rawData,
+          runnable: serialize(runnable)
+        }),
         [subChannel.port1]
       );
       subChannel.port2.on(
