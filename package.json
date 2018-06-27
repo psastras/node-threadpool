@@ -20,6 +20,7 @@
   "repository": "https://github.com/psastras/node-threadpool.git",
   "author": "Paul Sastrasinh <psastras@gmail.com>",
   "license": "MIT",
+  "homepage": "https://psastras.github.io/node-threadpool/",
   "private": false,
   "scripts": {
     "codecov": "codecov",
