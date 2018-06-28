@@ -90,18 +90,6 @@ export class FixedThreadPool implements ThreadPool.IThreadPool {
         });
       }
 
-      worker.postMessage(
-        ThreadWorker.createRunAction({
-          data:
-            data instanceof SharedArrayBuffer || !data
-              ? data
-              : serialize(data) || {},
-          port: subChannel.port1,
-          rawData,
-          runnable: serialize(runnable)
-        }),
-        [subChannel.port1]
-      );
       subChannel.port2.on(
         "message",
         ({
@@ -126,6 +114,19 @@ export class FixedThreadPool implements ThreadPool.IThreadPool {
             error(e);
           }
         }
+      );
+
+      worker.postMessage(
+        ThreadWorker.createRunAction({
+          data:
+            data instanceof SharedArrayBuffer || !data
+              ? data
+              : serialize(data) || {},
+          port: subChannel.port1,
+          rawData,
+          runnable: serialize(runnable)
+        }),
+        [subChannel.port1]
       );
     }
   };
