@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>Introduction · node-threadpool</title>
+        <title>Installation · node-threadpool</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -66,8 +66,10 @@
     <link rel="shortcut icon" href="gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="installation.html" />
+    <link rel="next" href="usage.html" />
     
+    
+    <link rel="prev" href="./" />
     
 
     <style>
@@ -107,7 +109,7 @@
         
         
     
-        <li class="chapter active" data-level="1.1" data-path="./">
+        <li class="chapter " data-level="1.1" data-path="./">
             
                 <a href="./">
             
@@ -120,7 +122,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.2" data-path="installation.html">
+        <li class="chapter active" data-level="1.2" data-path="installation.html">
             
                 <a href="installation.html">
             
@@ -325,7 +327,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href="." >Introduction</a>
+        <a href="." >Installation</a>
     </h1>
 </div>
 
@@ -340,40 +342,26 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="node-threadpool"><a name="node-threadpool" class="plugin-anchor" href="#node-threadpool"><i class="fa fa-link" aria-hidden="true"></i></a>node-threadpool</h1>
-<p><strong>WARNING: This project is mostly experimental and the API is subject to change.</strong></p>
-<p>This package implements thread pools using node 10.5&apos;s new worker thread API (see: <a href="https://nodejs.org/api/worker_threads.html" target="_blank">https://nodejs.org/api/worker_threads.html</a>).</p>
-<p>It supports an easy to use Promise based API to spawn and transfer data to and from threads.</p>
-<p>Unlike <code>cluster</code> or other similar node threading libraries, worker threads are native threads and support message passing as well as shared memory and atomic operations.</p>
-<p><a href="https://circleci.com/gh/psastras/node-threadpool" target="_blank"><img src="https://circleci.com/gh/psastras/node-threadpool.svg?style=svg" alt="CircleCI"></a>
-<a href="https://badge.fury.io/js/node-threadpool" target="_blank"><img src="https://badge.fury.io/js/node-threadpool.svg" alt="npm version"></a>
-<a href="https://codecov.io/gh/psastras/node-threadpool" target="_blank"><img src="https://codecov.io/gh/psastras/node-threadpool/branch/master/graph/badge.svg" alt="codecov"></a>
-<a href="https://david-dm.org/psastras/node-threadpool" target="_blank"><img src="https://david-dm.org/psastras/node-threadpool/status.svg" alt="dependencies Status"></a>
-<a href="https://github.com/semantic-release/semantic-release" target="_blank"><img src="https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg" alt="semantic-release"></a></p>
-<hr>
-<h2 id="quick-start"><a name="quick-start" class="plugin-anchor" href="#quick-start"><i class="fa fa-link" aria-hidden="true"></i></a>Quick Start</h2>
-<p>With npm,</p>
-<pre><code>npm i node-threadpool
-</code></pre><p>Or with yarn,</p>
-<pre><code>yarn add node-threadpool
-</code></pre><p>Then,</p>
-<pre><code class="lang-javascript"><span class="hljs-keyword">import</span> { Executors } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;node-threadpool&quot;</span>;
-
-<span class="hljs-comment">// creates a thread pool with 4 threads</span>
-<span class="hljs-keyword">const</span> pool = Executors.newFixedThreadPool(<span class="hljs-number">4</span>);
-
-<span class="hljs-comment">// these execute in parallel (as long as the pool size &gt;= 2)</span>
-<span class="hljs-keyword">const</span> result1 = pool.submit(<span class="hljs-keyword">async</span> () =&gt; <span class="hljs-string">&quot;done 1&quot;</span>);
-<span class="hljs-keyword">const</span> result2 = pool.submit(<span class="hljs-keyword">async</span> () =&gt; <span class="hljs-string">&quot;done 2&quot;</span>);
-
-<span class="hljs-built_in">console</span>.log(<span class="hljs-keyword">await</span> result1); <span class="hljs-comment">// joins and prints &quot;done1&quot;</span>
-<span class="hljs-built_in">console</span>.log(<span class="hljs-keyword">await</span> result2); <span class="hljs-comment">// joins and prints &quot;done2&quot;</span>
+                                <h1 id="installation"><a name="installation" class="plugin-anchor" href="#installation"><i class="fa fa-link" aria-hidden="true"></i></a>Installation</h1>
+<h2 id="requirements"><a name="requirements" class="plugin-anchor" href="#requirements"><i class="fa fa-link" aria-hidden="true"></i></a>Requirements</h2>
+<p><strong><code>node-threadpool</code> requires node &gt;= 10.5 to use the <a href="https://nodejs.org/api/worker_threads.html" target="_blank">worker thread API</a>.</strong></p>
+<p>Note that this is <code>node</code> only (ie. not available in the browser - use web workers instead).</p>
+<p>When running code, the experimental workers feature must be enabled. This can be enabled by either:</p>
+<p>Passing the <code>--experimental-workers</code> flag</p>
+<pre><code class="lang-shell">node --experimental-worker &lt;script&gt;
 </code></pre>
-<p><strong>Requires node 10.5+. You must run node with the <code>--experimental-worker</code> flag enabled.</strong></p>
-<pre><code>NODE_OPTIONS=--experimental-worker ./server.js
-</code></pre><p>or</p>
-<pre><code>node --experimental-worker ./server.js
+<p>Or by setting the environment variable</p>
+<pre><code class="lang-shell">NODE_OPTIONS=--experimental-worker node &lt;script&gt;
 </code></pre>
+<h2 id="downloading"><a name="downloading" class="plugin-anchor" href="#downloading"><i class="fa fa-link" aria-hidden="true"></i></a>Downloading</h2>
+<p>Versions of <code>node-threadpool</code> are <a href="https://npmjs.com/package/node-threadpool" target="_blank">published to npm</a>.</p>
+<p>If using <code>npm</code>, add the dependency via</p>
+<pre><code class="lang-shell">npm i node-threadpool
+</code></pre>
+<p>Or if using <code>yarn</code></p>
+<pre><code class="lang-shell">yarn add node-threadpool
+</code></pre>
+
                                 
                                 </section>
                             
@@ -400,8 +388,12 @@
 
             
                 
+                <a href="./" class="navigation navigation-prev " aria-label="Previous page: Introduction">
+                    <i class="fa fa-angle-left"></i>
+                </a>
                 
-                <a href="installation.html" class="navigation navigation-next navigation-unique" aria-label="Next page: Installation">
+                
+                <a href="usage.html" class="navigation navigation-next " aria-label="Next page: Usage">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -412,7 +404,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Introduction","level":"1.1","depth":1,"next":{"title":"Installation","level":"1.2","depth":1,"path":"installation.md","ref":"installation.md","articles":[]},"dir":"ltr"},"config":{"plugins":["collapsible-chapters","edit-link","github-buttons","anchors","sitemap-general","ga"],"root":"./docs","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"search":{},"collapsible-chapters":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sitemap-general":{"prefix":"https://psastras.github.io/node-threadpool/"},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"github-buttons":{"buttons":[{"user":"psastras","repo":"node-threadpool","type":"star","size":"small","count":true}]},"ga":{"configuration":"auto","token":"UA-121473830-1"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"edit-link":{"label":"Edit This Page","base":"https://github.com/psastras/node-threadpool/blob/master"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"anchors":{}},"theme":"default","author":"Paul Sastrasinh (psastras@gmail.com)","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"node-threadpool","gitbook":">=3.2.2","description":"A threadpool library for node using the worker_thread API"},"file":{"path":"README.md","mtime":"2018-06-28T00:08:14.739Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-06-28T00:09:16.048Z"},"basePath":".","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Installation","level":"1.2","depth":1,"next":{"title":"Usage","level":"1.3","depth":1,"path":"usage.md","ref":"usage.md","articles":[]},"previous":{"title":"Introduction","level":"1.1","depth":1,"path":"README.md","ref":"README.md","articles":[]},"dir":"ltr"},"config":{"plugins":["collapsible-chapters","edit-link","github-buttons","anchors","sitemap-general","ga"],"root":"./docs","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"search":{},"collapsible-chapters":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sitemap-general":{"prefix":"https://psastras.github.io/node-threadpool/"},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"github-buttons":{"buttons":[{"user":"psastras","repo":"node-threadpool","type":"star","size":"small","count":true}]},"ga":{"configuration":"auto","token":"UA-121473830-1"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"edit-link":{"label":"Edit This Page","base":"https://github.com/psastras/node-threadpool/blob/master"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"anchors":{}},"theme":"default","author":"Paul Sastrasinh (psastras@gmail.com)","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"node-threadpool","gitbook":">=3.2.2","description":"A threadpool library for node using the worker_thread API"},"file":{"path":"installation.md","mtime":"2018-06-28T00:08:14.743Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-06-28T00:09:16.048Z"},"basePath":".","book":{"language":""}});
         });
     </script>
 </div>

@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>Examples · node-threadpool</title>
+        <title>Basic Usage · node-threadpool</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -66,10 +66,10 @@
     <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="basic-usage.html" />
+    <link rel="next" href="passing-data.html" />
     
     
-    <link rel="prev" href="../advanced-usage/sharing-data.html" />
+    <link rel="prev" href="./" />
     
 
     <style>
@@ -193,7 +193,7 @@
             
         </li>
     
-        <li class="chapter active" data-level="1.5" data-path="./">
+        <li class="chapter " data-level="1.5" data-path="./">
             
                 <a href="./">
             
@@ -207,7 +207,7 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="1.5.1" data-path="basic-usage.html">
+        <li class="chapter active" data-level="1.5.1" data-path="basic-usage.html">
             
                 <a href="basic-usage.html">
             
@@ -327,7 +327,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >Examples</a>
+        <a href=".." >Basic Usage</a>
     </h1>
 </div>
 
@@ -342,13 +342,15 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="examples"><a name="examples" class="plugin-anchor" href="#examples"><i class="fa fa-link" aria-hidden="true"></i></a>Examples</h1>
-<ul>
-<li><a href="examples/basic-usage.md">Basic Usage</a></li>
-<li><a href="examples/passing-data.md">Passing Data</a></li>
-<li><a href="examples/shared-array-buffers.md">Shared Array Buffers</a></li>
-<li><a href="examples/atomics.md">Atomics</a></li>
-</ul>
+                                <h1 id="basic-usage"><a name="basic-usage" class="plugin-anchor" href="#basic-usage"><i class="fa fa-link" aria-hidden="true"></i></a>Basic Usage</h1>
+<p>To submit work to a thread pool, create a method which returns a promise.</p>
+<p>In this example, the method is declared inline and returns a <code>Promise&lt;string&gt;</code>.</p>
+<p>After completion of work, the thread pool resolves the promise with the value.</p>
+<p>We use <code>await</code> to wait until the result is available then print it to <code>console.log</code>.</p>
+<pre><code class="lang-typescript"><span class="hljs-keyword">const</span> pool = Executors.newFixedThreadPool(<span class="hljs-number">4</span>);
+<span class="hljs-keyword">const</span> result = pool.submit(async () =&gt; <span class="hljs-string">&quot;hello world&quot;</span>);
+<span class="hljs-built_in">console</span>.log(await result); <span class="hljs-comment">// prints &quot;hello world&quot;</span>
+</code></pre>
 
                                 
                                 </section>
@@ -376,12 +378,12 @@
 
             
                 
-                <a href="../advanced-usage/sharing-data.html" class="navigation navigation-prev " aria-label="Previous page: Sharing Data">
+                <a href="./" class="navigation navigation-prev " aria-label="Previous page: Examples">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
                 
-                <a href="basic-usage.html" class="navigation navigation-next " aria-label="Next page: Basic Usage">
+                <a href="passing-data.html" class="navigation navigation-next " aria-label="Next page: Passing Data">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -392,7 +394,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Examples","level":"1.5","depth":1,"next":{"title":"Basic Usage","level":"1.5.1","depth":2,"path":"examples/basic-usage.md","ref":"examples/basic-usage.md","articles":[]},"previous":{"title":"Sharing Data","level":"1.4.2","depth":2,"path":"advanced-usage/sharing-data.md","ref":"advanced-usage/sharing-data.md","articles":[]},"dir":"ltr"},"config":{"plugins":["collapsible-chapters","edit-link","github-buttons","anchors","sitemap-general","ga"],"root":"./docs","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"search":{},"collapsible-chapters":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sitemap-general":{"prefix":"https://psastras.github.io/node-threadpool/"},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"github-buttons":{"buttons":[{"user":"psastras","repo":"node-threadpool","type":"star","size":"small","count":true}]},"ga":{"configuration":"auto","token":"UA-121473830-1"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"edit-link":{"label":"Edit This Page","base":"https://github.com/psastras/node-threadpool/blob/master"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"anchors":{}},"theme":"default","author":"Paul Sastrasinh (psastras@gmail.com)","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"node-threadpool","gitbook":">=3.2.2","description":"A threadpool library for node using the worker_thread API"},"file":{"path":"examples/README.md","mtime":"2018-06-28T00:08:14.739Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-06-28T00:09:16.048Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Basic Usage","level":"1.5.1","depth":2,"next":{"title":"Passing Data","level":"1.5.2","depth":2,"path":"examples/passing-data.md","ref":"examples/passing-data.md","articles":[]},"previous":{"title":"Examples","level":"1.5","depth":1,"path":"examples/README.md","ref":"examples/README.md","articles":[{"title":"Basic Usage","level":"1.5.1","depth":2,"path":"examples/basic-usage.md","ref":"examples/basic-usage.md","articles":[]},{"title":"Passing Data","level":"1.5.2","depth":2,"path":"examples/passing-data.md","ref":"examples/passing-data.md","articles":[]},{"title":"Shared Array Buffers","level":"1.5.3","depth":2,"path":"examples/shared-array-buffers.md","ref":"examples/shared-array-buffers.md","articles":[]},{"title":"Atomics","level":"1.5.4","depth":2,"path":"examples/atomics.md","ref":"examples/atomics.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["collapsible-chapters","edit-link","github-buttons","anchors","sitemap-general","ga"],"root":"./docs","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"search":{},"collapsible-chapters":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sitemap-general":{"prefix":"https://psastras.github.io/node-threadpool/"},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"github-buttons":{"buttons":[{"user":"psastras","repo":"node-threadpool","type":"star","size":"small","count":true}]},"ga":{"configuration":"auto","token":"UA-121473830-1"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"edit-link":{"label":"Edit This Page","base":"https://github.com/psastras/node-threadpool/blob/master"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"anchors":{}},"theme":"default","author":"Paul Sastrasinh (psastras@gmail.com)","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"node-threadpool","gitbook":">=3.2.2","description":"A threadpool library for node using the worker_thread API"},"file":{"path":"examples/basic-usage.md","mtime":"2018-06-28T00:08:14.739Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-06-28T00:09:16.048Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
