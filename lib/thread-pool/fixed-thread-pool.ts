@@ -15,16 +15,8 @@ import { ThreadPool } from "./thread-pool";
 import { Actions, ThreadWorker } from "./thread-worker";
 
 export class FixedThreadPool implements ThreadPool.IThreadPool {
-  private freeWorkers: Worker[];
-
-  private queue: Array<
-    [
-      ThreadPool.Runnable<any, any>,
-      any,
-      (result: any) => void,
-      (err: Error) => void
-    ]
-  >;
+  private freeWorkers: Worker[] = [];
+  private queue: Array<ThreadPool.ISubmittedThread<any, any>> = [];
 
   constructor(
     private numThreads: number,
@@ -37,7 +29,6 @@ export class FixedThreadPool implements ThreadPool.IThreadPool {
           eval: true
         })
     );
-    this.queue = [];
   }
 
   public submit = <T, D>(
@@ -45,16 +36,16 @@ export class FixedThreadPool implements ThreadPool.IThreadPool {
     data?: D
   ): Promise<T> => {
     return new Promise((resolve, reject) => {
-      this.queue.push([fn, data, resolve, reject]);
+      const channel = new MessageChannel();
+      this.queue.push({ fn, data, resolve, reject });
       this.executeNext();
     });
   };
 
   private executeNext = (): any => {
     if (this.queue.length > 0 && this.freeWorkers.length > 0) {
-      const [runnable, data, success, error] = this.queue.shift()!;
+      const { fn, data, resolve, reject } = this.queue.shift()!;
       const worker = this.freeWorkers.shift()!;
-      const subChannel = new MessageChannel();
       const rawData: any = {};
 
       if (typeof data === "object") {
@@ -66,19 +57,20 @@ export class FixedThreadPool implements ThreadPool.IThreadPool {
         });
       }
 
-      subChannel.port2.on(
+      const channel = new MessageChannel();
+      channel.port2.on(
         "message",
         ({ action, payload: { result, msg } }: ThreadWorker.IResultAction) => {
           if (action === Actions.RESULT) {
             this.freeWorkers.push(worker);
             this.executeNext();
-            success(deserialize(result));
+            resolve(deserialize(result));
           } else if (action === Actions.ERROR) {
             this.freeWorkers.push(worker);
             this.executeNext();
             const e = deserialize(result);
             e.message = msg;
-            error(e);
+            reject(e);
           }
         }
       );
@@ -89,11 +81,11 @@ export class FixedThreadPool implements ThreadPool.IThreadPool {
             data instanceof SharedArrayBuffer || !data
               ? data
               : serialize(data) || {},
-          port: subChannel.port1,
+          port: channel.port1,
           rawData,
-          runnable: serialize(runnable)
+          runnable: serialize(fn)
         }),
-        [subChannel.port1]
+        [channel.port1]
       );
     }
   };
