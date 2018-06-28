@@ -19,7 +19,7 @@ export class FixedThreadPool implements ThreadPool.IThreadPool {
 
   private queue: Array<
     [
-      (data?: any) => Promise<any>,
+      ThreadPool.Runnable<any, any>,
       any,
       (result: any) => void,
       (err: Error) => void
@@ -41,7 +41,7 @@ export class FixedThreadPool implements ThreadPool.IThreadPool {
   }
 
   public submit = <T, D>(
-    fn: (data?: D) => Promise<T>,
+    fn: ThreadPool.Runnable<T, D>,
     data?: D
   ): Promise<T> => {
     return new Promise((resolve, reject) => {

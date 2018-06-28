@@ -3,7 +3,8 @@
  */
 
 export namespace ThreadPool {
+  export type Runnable<T, D> = (data?: D) => Promise<T>;
   export interface IThreadPool {
-    submit: <T, D>(fn: (data?: D) => Promise<T>, data?: D) => Promise<T>;
+    submit: <T, D>(fn: Runnable<T, D>, data?: D) => Promise<T>;
   }
 }
