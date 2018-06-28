@@ -97,7 +97,7 @@
 					<div class="tsd-signature tsd-kind-icon">code<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;&#x60;const { parentPort } &#x3D; require(&#x27;worker_threads&#x27;);const { serialize, deserialize } &#x3D; require(&#x27;surrial&#x27;);parentPort.on(&#x27;message&#x27;, ({ action, payload: { port, runnable, data, rawData } }) &#x3D;&gt; {if (action &#x3D;&#x3D;&#x3D; &quot;${Actions.RUN}&quot;) {try {const hydratedData &#x3D; data &amp;&amp; (data instanceof SharedArrayBuffer ? data : Object.assign(deserialize(data), rawData));deserialize(runnable)(hydratedData).then((result) &#x3D;&gt; {port.postMessage({ action: &quot;${Actions.RESULT}&quot;, payload: { result: serialize(result) } });})} catch (e) {port.postMessage({ action: &quot;${Actions.ERROR}&quot;, payload: { result: serialize(e), msg: e.message, error: true } });}}});&#x60;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/psastras/node-threadpool/blob/bb9d589/lib/thread-pool/thread-worker.ts#L28">thread-pool/thread-worker.ts:28</a></li>
+							<li>Defined in <a href="https://github.com/psastras/node-threadpool/blob/c81eddc/lib/thread-pool/thread-worker.ts#L28">thread-pool/thread-worker.ts:28</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -110,8 +110,8 @@
 					<div class="tsd-signature tsd-kind-icon">Thread<wbr>Worker<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/psastras/node-threadpool/blob/bb9d589/lib/thread-pool/thread-worker.ts#L7">thread-pool/thread-worker.ts:7</a></li>
-							<li>Defined in <a href="https://github.com/psastras/node-threadpool/blob/bb9d589/lib/thread-pool/thread-worker.ts#L49">thread-pool/thread-worker.ts:49</a></li>
+							<li>Defined in <a href="https://github.com/psastras/node-threadpool/blob/c81eddc/lib/thread-pool/thread-worker.ts#L7">thread-pool/thread-worker.ts:7</a></li>
+							<li>Defined in <a href="https://github.com/psastras/node-threadpool/blob/c81eddc/lib/thread-pool/thread-worker.ts#L49">thread-pool/thread-worker.ts:49</a></li>
 						</ul>
 					</aside>
 					<section class="tsd-panel tsd-member tsd-kind-interface tsd-parent-kind-object-literal">
@@ -120,7 +120,7 @@
 						<div class="tsd-signature tsd-kind-icon">IAction<span class="tsd-signature-symbol">:</span> </div>
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/psastras/node-threadpool/blob/bb9d589/lib/thread-pool/thread-worker.ts#L8">thread-pool/thread-worker.ts:8</a></li>
+								<li>Defined in <a href="https://github.com/psastras/node-threadpool/blob/c81eddc/lib/thread-pool/thread-worker.ts#L8">thread-pool/thread-worker.ts:8</a></li>
 							</ul>
 						</aside>
 						<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
@@ -129,7 +129,7 @@
 							<div class="tsd-signature tsd-kind-icon">action<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/psastras/node-threadpool/blob/bb9d589/lib/thread-pool/thread-worker.ts#L9">thread-pool/thread-worker.ts:9</a></li>
+									<li>Defined in <a href="https://github.com/psastras/node-threadpool/blob/c81eddc/lib/thread-pool/thread-worker.ts#L9">thread-pool/thread-worker.ts:9</a></li>
 								</ul>
 							</aside>
 						</section>
@@ -140,7 +140,7 @@
 						<div class="tsd-signature tsd-kind-icon">IError<wbr>Action<span class="tsd-signature-symbol">:</span> </div>
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/psastras/node-threadpool/blob/bb9d589/lib/thread-pool/thread-worker.ts#L17">thread-pool/thread-worker.ts:17</a></li>
+								<li>Defined in <a href="https://github.com/psastras/node-threadpool/blob/c81eddc/lib/thread-pool/thread-worker.ts#L17">thread-pool/thread-worker.ts:17</a></li>
 							</ul>
 						</aside>
 						<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-overwrite">
@@ -150,7 +150,7 @@
 							<aside class="tsd-sources">
 								<p>Overrides <a href="_thread_pool_thread_worker_.html#threadworker.iaction">IAction</a>.<a href="_thread_pool_thread_worker_.html#threadworker.iaction.action">action</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/psastras/node-threadpool/blob/bb9d589/lib/thread-pool/thread-worker.ts#L18">thread-pool/thread-worker.ts:18</a></li>
+									<li>Defined in <a href="https://github.com/psastras/node-threadpool/blob/c81eddc/lib/thread-pool/thread-worker.ts#L18">thread-pool/thread-worker.ts:18</a></li>
 								</ul>
 							</aside>
 						</section>
@@ -160,7 +160,7 @@
 							<div class="tsd-signature tsd-kind-icon">payload<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/psastras/node-threadpool/blob/bb9d589/lib/thread-pool/thread-worker.ts#L19">thread-pool/thread-worker.ts:19</a></li>
+									<li>Defined in <a href="https://github.com/psastras/node-threadpool/blob/c81eddc/lib/thread-pool/thread-worker.ts#L19">thread-pool/thread-worker.ts:19</a></li>
 								</ul>
 							</aside>
 						</section>
@@ -171,7 +171,7 @@
 						<div class="tsd-signature tsd-kind-icon">IResult<wbr>Action<span class="tsd-signature-symbol">:</span> </div>
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/psastras/node-threadpool/blob/bb9d589/lib/thread-pool/thread-worker.ts#L22">thread-pool/thread-worker.ts:22</a></li>
+								<li>Defined in <a href="https://github.com/psastras/node-threadpool/blob/c81eddc/lib/thread-pool/thread-worker.ts#L22">thread-pool/thread-worker.ts:22</a></li>
 							</ul>
 						</aside>
 						<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-overwrite">
@@ -181,7 +181,7 @@
 							<aside class="tsd-sources">
 								<p>Overrides <a href="_thread_pool_thread_worker_.html#threadworker.iaction">IAction</a>.<a href="_thread_pool_thread_worker_.html#threadworker.iaction.action">action</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/psastras/node-threadpool/blob/bb9d589/lib/thread-pool/thread-worker.ts#L23">thread-pool/thread-worker.ts:23</a></li>
+									<li>Defined in <a href="https://github.com/psastras/node-threadpool/blob/c81eddc/lib/thread-pool/thread-worker.ts#L23">thread-pool/thread-worker.ts:23</a></li>
 								</ul>
 							</aside>
 						</section>
@@ -191,7 +191,7 @@
 							<div class="tsd-signature tsd-kind-icon">payload<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/psastras/node-threadpool/blob/bb9d589/lib/thread-pool/thread-worker.ts#L24">thread-pool/thread-worker.ts:24</a></li>
+									<li>Defined in <a href="https://github.com/psastras/node-threadpool/blob/c81eddc/lib/thread-pool/thread-worker.ts#L24">thread-pool/thread-worker.ts:24</a></li>
 								</ul>
 							</aside>
 						</section>
@@ -202,7 +202,7 @@
 						<div class="tsd-signature tsd-kind-icon">IRun<wbr>Action<span class="tsd-signature-symbol">:</span> </div>
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/psastras/node-threadpool/blob/bb9d589/lib/thread-pool/thread-worker.ts#L12">thread-pool/thread-worker.ts:12</a></li>
+								<li>Defined in <a href="https://github.com/psastras/node-threadpool/blob/c81eddc/lib/thread-pool/thread-worker.ts#L12">thread-pool/thread-worker.ts:12</a></li>
 							</ul>
 						</aside>
 						<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-overwrite">
@@ -212,7 +212,7 @@
 							<aside class="tsd-sources">
 								<p>Overrides <a href="_thread_pool_thread_worker_.html#threadworker.iaction">IAction</a>.<a href="_thread_pool_thread_worker_.html#threadworker.iaction.action">action</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/psastras/node-threadpool/blob/bb9d589/lib/thread-pool/thread-worker.ts#L13">thread-pool/thread-worker.ts:13</a></li>
+									<li>Defined in <a href="https://github.com/psastras/node-threadpool/blob/c81eddc/lib/thread-pool/thread-worker.ts#L13">thread-pool/thread-worker.ts:13</a></li>
 								</ul>
 							</aside>
 						</section>
@@ -222,7 +222,7 @@
 							<div class="tsd-signature tsd-kind-icon">payload<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/psastras/node-threadpool/blob/bb9d589/lib/thread-pool/thread-worker.ts#L14">thread-pool/thread-worker.ts:14</a></li>
+									<li>Defined in <a href="https://github.com/psastras/node-threadpool/blob/c81eddc/lib/thread-pool/thread-worker.ts#L14">thread-pool/thread-worker.ts:14</a></li>
 								</ul>
 							</aside>
 						</section>
@@ -233,7 +233,7 @@
 						<div class="tsd-signature tsd-kind-icon">code<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/psastras/node-threadpool/blob/bb9d589/lib/thread-pool/thread-worker.ts#L50">thread-pool/thread-worker.ts:50</a></li>
+								<li>Defined in <a href="https://github.com/psastras/node-threadpool/blob/c81eddc/lib/thread-pool/thread-worker.ts#L50">thread-pool/thread-worker.ts:50</a></li>
 							</ul>
 						</aside>
 					</section>
@@ -247,7 +247,7 @@
 							<li class="tsd-description">
 								<aside class="tsd-sources">
 									<ul>
-										<li>Defined in <a href="https://github.com/psastras/node-threadpool/blob/bb9d589/lib/thread-pool/thread-worker.ts#L51">thread-pool/thread-worker.ts:51</a></li>
+										<li>Defined in <a href="https://github.com/psastras/node-threadpool/blob/c81eddc/lib/thread-pool/thread-worker.ts#L51">thread-pool/thread-worker.ts:51</a></li>
 									</ul>
 								</aside>
 								<h4 class="tsd-parameters-title">Parameters</h4>
