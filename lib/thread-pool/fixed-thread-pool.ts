@@ -36,7 +36,6 @@ export class FixedThreadPool implements ThreadPool.IThreadPool {
     data?: D
   ): Promise<T> => {
     return new Promise((resolve, reject) => {
-      const channel = new MessageChannel();
       this.queue.push({ fn, data, resolve, reject });
       this.executeNext();
     });
