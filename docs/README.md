@@ -9,7 +9,7 @@ features:
   details: Supports async/await. Submit a function to a thread pool to run it and wait for the returned Promise to resolve.
 - title: Shared Memory
   details: Worker threads can share memory via shared array buffers and synchronize with the Atomic API
-footer: MIT Licensed | Copyright © 2018-present Evan You
+footer: MIT Licensed | Copyright © 2018-present Paul Sastrasinh
 ---
 
 ---
@@ -20,14 +20,8 @@ footer: MIT Licensed | Copyright © 2018-present Evan You
 
 With npm,
 
-```
-npm i node-threadpool
-```
-
-Or with yarn,
-
-```
-yarn add node-threadpool
+```bash
+npm i node-threadpool # OR yarn add node-threadpool
 ```
 
 #### Usage
@@ -46,7 +40,11 @@ console.log(await result1); // joins and prints "done1"
 console.log(await result2); // joins and prints "done2"
 ```
 
-**Requires node 10.5+. You must run node with the `--experimental-worker` flag enabled.**
+::: warning COMPATIBILITY NOTE
+Requires node 10.5+. You must run node with the `--experimental-worker` flag enabled.
+:::
+
+#### Enable Experimental Workers
 
 ```
 NODE_OPTIONS=--experimental-worker ./server.js
@@ -57,7 +55,3 @@ or
 ```
 node --experimental-worker ./server.js
 ```
-
-#### Typescript
-
-Written in Typescript. Types are included in the dependency and work out of the box.

@@ -2,7 +2,9 @@
 
 ## Requirements
 
-**`node-threadpool` requires node >= 10.5 to use the [worker thread API](https://nodejs.org/api/worker_threads.html).**
+::: warning COMPATIBILITY NOTE
+Requires node 10.5+ to use the [worker thread API](https://nodejs.org/api/worker_threads.html). You must run node with the `--experimental-worker` flag enabled.
+:::
 
 Note that this is `node` only (ie. not available in the browser - use web workers instead).
 
@@ -10,7 +12,7 @@ When running code, the experimental workers feature must be enabled. This can be
 
 Passing the `--experimental-workers` flag
 
-```sh
+```bash
 node --experimental-worker <script>
 ```
 
