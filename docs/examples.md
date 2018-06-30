@@ -10,7 +10,7 @@ After completion of work, the thread pool resolves the promise with the value.
 
 We use `await` to wait until the result is available then print it to `console.log`.
 
-```typescript
+```javascript
 const pool = Executors.newFixedThreadPool(4);
 const result = pool.submit(async () => "hello world");
 console.log(await result); // prints "hello world"

@@ -10,13 +10,13 @@ When running code, the experimental workers feature must be enabled. This can be
 
 Passing the `--experimental-workers` flag
 
-```shell
+```sh
 node --experimental-worker <script>
 ```
 
 Or by setting the environment variable
 
-```shell
+```bash
 NODE_OPTIONS=--experimental-worker node <script>
 ```
 
@@ -26,12 +26,12 @@ Versions of `node-threadpool` are [published to npm](https://npmjs.com/package/n
 
 If using `npm`, add the dependency via
 
-```shell
+```bash
 npm i node-threadpool
 ```
 
 Or if using `yarn`
 
-```shell
+```bash
 yarn add node-threadpool
 ```

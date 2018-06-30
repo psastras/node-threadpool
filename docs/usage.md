@@ -10,7 +10,7 @@ import { Executors } from "node-threadpool";
 
 To create a new thread pool, call one of the methods:
 
-```javasript
+```javascript
 const pool = Executors.newFixedThreadPool(4); // creates a pool with 4 threads
 ```
 

@@ -1,6 +1,6 @@
 module.exports = {
   title: "node-threadpool",
-  base: "https://psastras.github.io/node-threadpool/",
+  base: "/node-threadpool/",
   description: "Thread pools using native threads for node.js",
   dest: "dist/docs",
   ga: "UA-121473830-1",
